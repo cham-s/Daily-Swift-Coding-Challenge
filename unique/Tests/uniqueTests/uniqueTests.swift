@@ -2,14 +2,27 @@ import XCTest
 @testable import unique
 
 final class uniqueTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(unique().text, "Hello, World!")
+    
+    func firstTest() {
+        XCTAssertTrue(challenge1(input: "No duplicates"))
+    }
+    
+    func secondTest() {
+        XCTAssertTrue(challenge1(input: "abcdefghijklmnopqrstuvwxyz"))
+    }
+    
+    func thirdTest() {
+        XCTAssertTrue(challenge1(input: "AaBbCc"))
+    }
+    
+    func fourthTest() {
+        XCTAssertTrue(challenge1(input: "Hello, world"))
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("firstTest", firstTest),
+        ("secondTest", secondTest),
+        ("thirdTest", thirdTest),
+        ("fourthTest", fourthTest),
     ]
 }
