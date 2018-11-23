@@ -51,4 +51,4 @@ swift package generate-xcodeproj
 Then open the project with XCode and you can run the test directly from the test source file
 by clicking on the little diamond button on the left of the class definition.
 
-![alt text](https://imgur.com/a/BlVHsIQ "test button")
+![run test](https://i.imgur.com/kzRmcmg.jpg)
