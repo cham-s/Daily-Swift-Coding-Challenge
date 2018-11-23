@@ -2,14 +2,32 @@ import XCTest
 @testable import Challenge2
 
 final class Challenge2Tests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(Challenge2().text, "Hello, World!")
+
+    func testOne() {
+        XCTAssertTrue(challenge2(input: "Ana"))
+    }
+    
+    func testTwo() {
+        XCTAssertTrue(challenge2(input: "alula"))
+    }
+    
+    func testThree() {
+        XCTAssertTrue(challenge2(input: "Elle"))
+    }
+    
+    func testFour() {
+        XCTAssertFalse(challenge2(input: "Four"))
+    }
+    
+    func testFive() {
+        XCTAssertFalse(challenge2(input: "Boulangerie"))
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testOne", testOne),
+        ("testTwo", testTwo),
+        ("testThree", testThree),
+        ("testFour", testFour),
+        ("testFive", testFive)
     ]
 }
