@@ -1,7 +1,7 @@
 import Foundation
 
 public func challenge11(input: String) -> String {
-    let elements = input.components(separatedBy: " ").sorted()
+    let elements = input.components(separatedBy: " ")
     var longestSuffix = ""
     
     for element in elements {
