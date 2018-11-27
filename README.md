@@ -5,7 +5,8 @@ the challenge of trying to solve coding challenges every day.
 
 The challenges mainly comes from The Swift Coding Challenge written by Paul hudson.
 I really recommend the book, as it tests your current knolwedge of the language.
-The repo contains my own implementation of the solutions.
+The repo contains my own implementation of the solutions. The order does not particularly follows 
+the book.
 
 I intend to expand the sources of the challenges after finishing the book.
 r/dailyprogrammer is also a great source for coding challenges.
