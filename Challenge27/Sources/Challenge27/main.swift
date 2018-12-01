@@ -16,3 +16,4 @@ let result = challenge27(filename: "./input", word: "Hello")
 
 print(result ?? "niled")
 
+
