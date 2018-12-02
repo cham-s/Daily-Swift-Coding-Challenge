@@ -28,13 +28,12 @@ final class Challenge29Tests: XCTestCase {
         let validOutputs = ["a", "b"]
         let invalidOutputs = ["firstLevel", "secondLevel"]
         
-        for item in validOutputs {
-            XCTAssertEqual(output, item)
-        }
+        // The test does not pass because I guess the app is run in sandbox so
+        // testFolder is not visible.
+        // swift run on the terminal produces the desire result
+        XCTAssertEqual(output, validOutputs.description)
         
-        for item in invalidOutputs {
-            XCTAssertNotEqual(output, item)
-        }
+        XCTAssertNotEqual(output, invalidOutputs.description)
     }
 
     /// Returns path to the built products directory.
