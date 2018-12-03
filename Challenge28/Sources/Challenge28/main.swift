@@ -32,6 +32,6 @@ func challenge28(directory: String) -> [String] {
     return duplicates
 }
 
-let result = challenge28(directory: "./test")
+let result = challenge28(directory: "/Users/cattouma/study/cs/swift/challenges/Challenge28/test")
 
 print(result)

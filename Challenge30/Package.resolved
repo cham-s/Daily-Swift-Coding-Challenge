@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ToolKit",
+        "repositoryURL": "https://github.com/cham-s/ToolKit.git",
+        "state": {
+          "branch": null,
+          "revision": "54c9f73e30c9a2c236b2ad541a6f3052b4b9f919",
+          "version": "0.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
