@@ -7,8 +7,7 @@ install:
     - sudo installer -pkg swift-4.2.1-RELEASE-osx.pkg -target /
     - export PATH="/Library/Developer/Toolchains/swift-4.2.1-RELEASE.xtoolchain/usr/bin:$PATH"
 script:
-    - cd Challenge01/
+    - cd challenges/Challenge01/
     - swift --version
     - swift package update
     - swift test
-    - cd ../
