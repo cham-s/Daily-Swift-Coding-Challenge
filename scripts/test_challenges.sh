@@ -16,5 +16,5 @@ cd challenges
 
 for package in "${valid[@]}"
 do
-	cd $package && swift test && cd ../
+	cd $package && swift --version && swift package update &&  swift test && cd ../
 done
