@@ -13,18 +13,9 @@ import Foundation
 public func challenge1(input: String) -> Bool {
     
     let inputArray = Array(input)
-    var seenCharacters = [Character]()
-    for letter in inputArray {
-        if seenCharacters.contains(letter) {
-            return false
-        }
-        seenCharacters.append(letter)
-    }
-    
-    
     let inputSet = NSCountedSet(array: inputArray)
-    for letter in inputArray {
-        if inpu
+    if let _ = inputArray.firstIndex(where: { inputSet.count(for: $0) > 1 }) {
+        return false
     }
     return true
 }
