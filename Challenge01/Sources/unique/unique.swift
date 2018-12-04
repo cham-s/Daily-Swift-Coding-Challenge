@@ -6,8 +6,11 @@
 //  Created by chams on 22/11/2018.
 //
 
-public func challenge1(input: String) -> Bool {
+import Foundation
 
+
+
+public func challenge1(input: String) -> Bool {
     
     let inputArray = Array(input)
     var seenCharacters = [Character]()
@@ -16,6 +19,12 @@ public func challenge1(input: String) -> Bool {
             return false
         }
         seenCharacters.append(letter)
+    }
+    
+    
+    let inputSet = NSCountedSet(array: inputArray)
+    for letter in inputArray {
+        if inpu
     }
     return true
 }

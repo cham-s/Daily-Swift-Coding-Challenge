@@ -3,26 +3,26 @@ import XCTest
 
 final class uniqueTests: XCTestCase {
     
-    func firstTest() {
+    func testOne() {
         XCTAssertTrue(challenge1(input: "No duplicates"))
     }
     
-    func secondTest() {
+    func testTwo() {
         XCTAssertTrue(challenge1(input: "abcdefghijklmnopqrstuvwxyz"))
     }
     
-    func thirdTest() {
+    func testThree() {
         XCTAssertTrue(challenge1(input: "AaBbCc"))
     }
     
-    func fourthTest() {
-        XCTAssertTrue(challenge1(input: "Hello, world"))
+    func testFour() {
+        XCTAssertFalse(challenge1(input: "Hello, world"))
     }
 
     static var allTests = [
-        ("firstTest", firstTest),
-        ("secondTest", secondTest),
-        ("thirdTest", thirdTest),
-        ("fourthTest", fourthTest),
+        ("testOne", testOne),
+        ("testTwo", testTwo),
+        ("testThree", testThree),
+        ("testFour", testFour),
     ]
 }
