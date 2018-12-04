@@ -1,4 +1,4 @@
-# Daily Swift Coding Challenge  💻 💪🏽
+# Daily Swift Coding Challenge  💻 💪🏽 [![Build Status](https://travis-ci.com/cham-s/Daily-Swift-Coding-Challenge.svg?branch=master)](https://travis-ci.com/cham-s/Daily-Swift-Coding-Challenge) 
 
 In order to get a better undertanding of the Swift programming language I took
 the challenge of trying to solve coding challenges every day.
@@ -52,4 +52,4 @@ swift package generate-xcodeproj
 Then open the project with XCode and you can run the test directly from the test source file
 by clicking on the little diamond button on the left of the class definition.
 
-![run test](https://i.imgur.com/kzRmcmg.jpg)
+![run test](https://i.imgur.com/XHaazAG.png)
