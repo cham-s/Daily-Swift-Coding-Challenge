@@ -1,3 +1,4 @@
+import Foundation
 
 public func challenge2(input: String) -> Bool {
     let lowercased = input.lowercased()
