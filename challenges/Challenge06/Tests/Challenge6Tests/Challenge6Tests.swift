@@ -3,16 +3,16 @@ import XCTest
 
 final class Challenge6Tests: XCTestCase {
     
-    func firstTest() {
+    func testFirst() {
         XCTAssertEqual(challenge6(input: "DVD"), "DV" )
     }
     
-    func secondTest() {
+    func testSecond() {
         XCTAssertEqual(challenge6(input: "dossier"), "dosier" )
     }
 
     static var allTests = [
-        ("first Test", firstTest),
-        ("second Test", secondTest)
+        ("first Test", testFirst),
+        ("second Test", testSecond)
     ]
 }
