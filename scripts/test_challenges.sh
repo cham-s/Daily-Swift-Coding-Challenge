@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a valid=("Challenge01" "Challenge02")
+declare -a valid=("Challenge01" "Challenge02" "Challenge03")
 
 # TODO: more dynamic approach with a filter for testable packages.
 # Ideally all packages are testable and all packages are tested via a loop.
