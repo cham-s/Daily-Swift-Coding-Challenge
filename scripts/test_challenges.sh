@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -a valid=("Challenge01" "Challenge02" "Challenge03" "Challenge04" \
-	"Challenge05")
+	"Challenge05" "Challenge06", "Challenge07")
 
 # TODO: more dynamic approach with a filter for testable packages.
 # Ideally all packages are testable and all packages are tested via a loop.
