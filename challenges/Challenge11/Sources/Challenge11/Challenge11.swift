@@ -22,4 +22,3 @@ public func challenge11(input: String) -> String {
     }
     return longestSuffix
 }
-
