@@ -6,23 +6,10 @@ func challenge19(_ number: Int) -> (lowest: Int, highest: Int) {
     }
     
     let onesCount = oneCount(num: number)
-    var highest = 0
-    var lowest = 0
+    let highest = (number+1..<Int.max).first(where: { oneCount(num: $0) == onesCount })
+    let lowest = (0..<number).reversed().first(where: { oneCount(num: $0) == onesCount })
     
-    for i in number+1..<Int.max {
-        if oneCount(num: i) == onesCount {
-            highest = i
-            break
-        }
-    }
-    
-    var start = number - 1
-    while start > 0 {
-        if oneCount(num: start) == onesCount  {
-            lowest = start
-            break
-        }
-        start -= 1
-    }
-    return (lowest, highest)
+    return (lowest!, highest!)
 }
+
+
