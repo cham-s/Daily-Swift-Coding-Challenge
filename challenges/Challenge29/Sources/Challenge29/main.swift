@@ -10,15 +10,9 @@ func challenge28(directory: String) -> [String] {
         return []
     }
     
-    var executables = [String]()
-
-    for url in contentDirectory {
-        if url.hasDirectoryforPath { continue }
-        if fm.isExecutableFile(atPath: url.path) {
-            executables.append(url.lastPathComponent)
-        }
-    }
-    
+    let executables = contentDirectory.filter { !$0.hasDirectoryforPath &&
+                                        fm.isExecutableFile(atPath: $0.path) }
+                                        .map {$0.lastPathComponent}
     return executables
 }
 
