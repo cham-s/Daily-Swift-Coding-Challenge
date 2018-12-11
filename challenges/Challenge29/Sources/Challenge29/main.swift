@@ -1,14 +1,5 @@
 import Foundation
-
-extension URL {
-    var isDirectory: Bool {
-        let fm = FileManager.default
-        var isDir: ObjCBool = false
-        fm.fileExists(atPath: self.path, isDirectory: &isDir)
-        
-        return isDir.boolValue
-    }
-}
+import ToolKit
 
 func challenge28(directory: String) -> [String] {
     let fm = FileManager.default
@@ -22,15 +13,7 @@ func challenge28(directory: String) -> [String] {
     var executables = [String]()
 
     for url in contentDirectory {
-        if #available(OSX 10.11, *) {
-            if url.hasDirectoryPath {
-                continue
-            }
-        } else {
-            if url.isDirectory {
-                continue
-            }
-        }
+        if url.hasDirectoryforPath { continue }
         if fm.isExecutableFile(atPath: url.path) {
             executables.append(url.lastPathComponent)
         }
