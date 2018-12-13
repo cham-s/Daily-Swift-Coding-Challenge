@@ -1,47 +1,39 @@
 import XCTest
-import class Foundation.Bundle
+@testable import Challenge30
 
 final class Challenge30Tests: XCTestCase {
-    func testExample() throws {
+    func testFirst() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-
-        // Some of the APIs that we use below are available in macOS 10.13 and above.
-        guard #available(macOS 10.13, *) else {
-            return
-        }
-
-        let fooBinary = productsDirectory.appendingPathComponent("Challenge30")
-
-        let process = Process()
-        process.executableURL = fooBinary
-
-        let pipe = Pipe()
-        process.standardOutput = pipe
-
-        try process.run()
-        process.waitUntilExit()
-
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        let output = String(data: data, encoding: .utf8)
-
-        XCTAssertEqual(output, "Hello, world!\n")
+        XCTAssertEqual([5, 15, 55, 515].challenge30(count: "5"), 6)
     }
-
-    /// Returns path to the built products directory.
-    var productsDirectory: URL {
-      #if os(macOS)
-        for bundle in Bundle.allBundles where bundle.bundlePath.hasSuffix(".xctest") {
-            return bundle.bundleURL.deletingLastPathComponent()
-        }
-        fatalError("couldn't find the products directory")
-      #else
-        return Bundle.main.bundleURL
-      #endif
+    
+    func testSecond() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct
+        // results.
+        XCTAssertEqual([5, 15, 55, 515].challenge30(count: "1"), 2)
     }
-
+    
+    func testThird() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct
+        // results.
+        XCTAssertEqual([333333].challenge30(count: "3"), 6)
+    }
+    
+    func testFourth() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct
+        // results.
+        XCTAssertEqual([444444444].challenge30(count: "2"), 0)
+    }
+    
     static var allTests = [
-        ("testExample", testExample),
+        ("firstTest", testFirst),
+        ("secondTest", testSecond),
+        ("thirdTest", testThird),
+        ("fourthTest", testFourth)
     ]
 }
