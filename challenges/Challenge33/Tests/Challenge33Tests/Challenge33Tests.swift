@@ -17,3 +17,4 @@ final class Challenge33Tests: XCTestCase {
         ("testExample", testExample),
     ]
 }
+
