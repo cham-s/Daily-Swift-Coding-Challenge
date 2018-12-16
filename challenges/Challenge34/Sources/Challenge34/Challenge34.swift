@@ -1,7 +1,7 @@
 extension Collection where Iterator.Element == Int {
     func challenge34() -> Double? {
         guard count > 0 else { return nil }
-        let numbers = Array(self)
+        let numbers = Array(self).sorted()
         let mean: Double
         let middle = count / 2
         
