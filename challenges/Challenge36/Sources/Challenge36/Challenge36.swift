@@ -42,3 +42,16 @@ class LinkedList<Element> {
         }
     }
 }
+
+extension LinkedList {
+    var centerNode: LinkedListNode<Element>? {
+        var slow = start
+        var fast = start
+        
+        while fast != nil && fast?.next != nil {
+            slow = slow?.next
+            fast = fast?.next?.next
+        }
+        return slow
+    }
+}
