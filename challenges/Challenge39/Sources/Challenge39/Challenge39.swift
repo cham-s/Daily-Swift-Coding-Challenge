@@ -18,6 +18,6 @@ struct deque<T> {
     }
     
     mutating func popBack() -> T? {
-        return values.last
+        return values.popLast()
     }
 }
