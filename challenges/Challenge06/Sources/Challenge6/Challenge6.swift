@@ -1,11 +1,9 @@
 import Foundation
 
 func challenge6(input: String) -> String {
-    var output = [Character]()
-    for letter in input {
-        if !output.contains(letter) {
-            output.append(letter)
-        }
+    var used = [Character: Character]()
+    let result = input.filter {
+        used.updateValue($0, forKey: $0) == nil
     }
-    return String(output)
+    return String(result)
 }
