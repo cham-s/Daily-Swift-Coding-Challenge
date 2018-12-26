@@ -1,12 +1,18 @@
 import Foundation
 
-func challenge9(input: String) -> (consonants: Int, vowels: Int) {
-    var output: (consonants: Int, vowels: Int)
-    let consonantsSet = CharacterSet(charactersIn: "bcdfghjklmnpqrstvwxyz")
-    let vowelsSet = CharacterSet(charactersIn: "aeiou")
+func challenge9(input: String) -> (vowels: Int, consonants: Int) {
+    guard !input.isEmpty else {
+        return (0, 0)
+    }
     
-    output.consonants = input.filter { String($0).rangeOfCharacter(from: consonantsSet) != nil }.count
-    output.vowels = input.filter { String($0).rangeOfCharacter(from: vowelsSet) != nil }.count
+    let vowels = input.filter {
+        String($0).rangeOfCharacter(from:
+            CharacterSet(charactersIn: "aeiou")) != nil
+    }.count
+    let consonants = input.filter {
+        String($0).rangeOfCharacter(from:
+            CharacterSet(charactersIn: "bcdfghjklmnpqrstvwxyz")) != nil
+    }.count
     
-    return output
+    return (vowels, consonants)
 }
