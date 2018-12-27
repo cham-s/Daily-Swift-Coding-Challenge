@@ -1,19 +1,27 @@
 import Foundation
 
 func challenge12(input: String) -> String {
-    guard var currentLetter = input.first else { return "" }
-    let inputArray = Array(input)
-    var count = 0
+    guard !input.isEmpty else { return "" }
     var output = ""
-    for index in 0..<input.count {
-        if inputArray[index] != currentLetter {
-            output += "\(currentLetter)\(count)"
-            count = 0
-            currentLetter = inputArray[index]
-        }
-        count += 1
-    }
-    output += "\(currentLetter)\(count)"
+    var currentLetter: Character? = nil
+    var letterCount = 0
     
+    for letter in input {
+        if currentLetter == nil {
+            currentLetter = letter
+            letterCount = 1
+        } else {
+            if let current = currentLetter,
+                current != letter {
+                output += "\(current)\(letterCount)"
+                currentLetter = letter
+                letterCount = 1
+            } else {
+                letterCount += 1
+            }
+        }
+    }
+    
+    output += "\(currentLetter!)\(letterCount)"
     return output
 }
