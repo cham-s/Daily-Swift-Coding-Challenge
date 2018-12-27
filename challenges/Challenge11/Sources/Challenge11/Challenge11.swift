@@ -1,24 +1,23 @@
 import Foundation
 
-public func challenge11(input: String) -> String {
-    let elements = input.components(separatedBy: " ")
-    var longestSuffix = ""
+func challenge11(input: String) -> String {
+    guard !input.isEmpty else { return "" }
     
-    for element in elements {
-        let arrayElement = Array(element)
-        for item in elements {
-            guard item != element else { continue }
-            let arrayItem = Array(item)
-            var index = 0
-            var currentLongest = [Character]()
-            while arrayItem[index] == arrayElement[index] {
-                currentLongest.append(arrayItem[index])
-                index += 1
-            }
-            if currentLongest.count > longestSuffix.count {
-                longestSuffix = String(currentLongest)
+    let components = input.components(separatedBy: " ")
+    let first = components.first!
+    var currentPrefix = ""
+    var bestPrefix = ""
+    
+    for letter in first {
+        currentPrefix.append(letter)
+        
+        for word in components {
+            if !word.hasPrefix(currentPrefix) {
+                return bestPrefix
             }
         }
+        
+        bestPrefix = currentPrefix
     }
-    return longestSuffix
+    return bestPrefix
 }
