@@ -6,16 +6,20 @@ final class Challenge19Tests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(challenge19(12).highest, 17)
-        XCTAssertEqual(challenge19(12).lowest, 10)
+        if let values = challenge19(12) {
+            XCTAssertEqual(values.highest, 17)
+            XCTAssertEqual(values.lowest, 10)
+        }
     }
     
     func testExample2(){
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(challenge19(28).highest, 35)
-        XCTAssertEqual(challenge19(28).lowest, 26)
+        if let values = challenge19(28) {
+            XCTAssertEqual(values.highest, 35)
+            XCTAssertEqual(values.lowest, 26)
+        }
     }
     
     
