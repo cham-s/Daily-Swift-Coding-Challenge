@@ -29,11 +29,19 @@ final class Challenge18Tests: XCTestCase {
         // results.
         XCTAssertFalse(challenge18(9))
     }
+    
+    func testExample5() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct
+        // results.
+        XCTAssertTrue(challenge18(16777259))
+    }
 
     static var allTests = [
         ("testExample", testExample),
         ("testExample2", testExample2),
         ("testExample3", testExample3),
         ("testExample4", testExample4),
+        ("testExample5", testExample5)
     ]
 }

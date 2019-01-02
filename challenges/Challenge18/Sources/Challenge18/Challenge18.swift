@@ -1,11 +1,11 @@
 import Foundation
 
 func challenge18(_ number: Int) -> Bool {
-    guard number >= 2 else { return false }
-    let sqroot = Int(sqrt(Double(number)))
-    print(sqroot)
-    for i in 2...sqroot {
-        if  number % i == 0 {
+    guard number > 1 else { return false }
+    
+    let greatestPossibleFactor = Int(sqrt(Double(number)))
+    for i in 2...greatestPossibleFactor {
+        if number % i == 0 {
             return false
         }
     }
