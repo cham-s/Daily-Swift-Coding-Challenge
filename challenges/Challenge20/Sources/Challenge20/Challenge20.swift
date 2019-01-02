@@ -1,9 +1,10 @@
 func challenge20(_ number: UInt8) -> UInt8 {
-    let binary = String(number, radix: 2)
-    let zeroCount = 8 - binary.count
-    let padded = String(repeating: "0", count: zeroCount) + binary
-    let reversed = String(padded.reversed())
-    print(reversed)
+    guard number > 0 else { return number }
     
-    return UInt8(reversed, radix: 2)!
+    let binary = String(number, radix: 2)
+    let padding = 8 - binary.count
+    let reversed = String(binary.reversed()) +
+                        String(repeating: "0", count: padding)
+    let result =  UInt8(reversed, radix: 2)!
+    return result
 }
