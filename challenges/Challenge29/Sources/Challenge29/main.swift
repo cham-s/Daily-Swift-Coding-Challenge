@@ -1,19 +1,22 @@
 import Foundation
-import ToolKit
 
-func challenge28(directory: String) -> [String] {
+@available(OSX 10.11, *)
+func findExec(from filename: String) -> [String] {
     let fm = FileManager.default
-    let directoryURL = URL(fileURLWithPath: directory)
+    let directoryURL = URL(fileURLWithPath: filename)
     
-    guard let contentDirectory = try? fm.contentsOfDirectory(at: directoryURL, includingPropertiesForKeys: nil) else {
-        print("not found")
-        return []
-    }
-    
-    let executables = contentDirectory.filter { !$0.hasDirectoryforPath &&
-                                        fm.isExecutableFile(atPath: $0.path) }
-                                        .map {$0.lastPathComponent}
-    return executables
+    guard let files = try? fm.contentsOfDirectory(at: directoryURL,
+                                                  includingPropertiesForKeys: nil,
+                                                  options: []) else { return [] }
+    return files.filter {
+        fm.isExecutableFile(atPath: $0.path) && !$0.hasDirectoryPath
+        }.map { $0.lastPathComponent }
 }
 
-print(challenge28(directory: "./folderTest"))
+
+if #available(OSX 10.11, *) {
+    print(findExec(from: "./folder"))
+} else {
+    // Fallback on earlier versions
+}
+
