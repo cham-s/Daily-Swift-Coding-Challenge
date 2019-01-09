@@ -1,19 +1,12 @@
 import Foundation
 
-func challenge27(filename: String, word: String) -> Int? {
-    guard let content = try? String(contentsOfFile: filename) else {
-        print("大変です")
-        return nil
-    }
+func frequency(ofWord: String, fromFilename: String) -> Int {
+    guard let content = try? String(contentsOfFile: fromFilename) else { return 0 }
+    var nonLetters = CharacterSet.letters.inverted
+    nonLetters.remove(charactersIn: "'")
     
-    var validSet = CharacterSet.letters.inverted
-    validSet.remove("'")
-    let components = content.components(separatedBy: validSet)
-    return components.filter { $0 == word }.count
+    let words = content.components(separatedBy: nonLetters)
+    return words.filter { $0 == ofWord }.count
 }
 
-let result = challenge27(filename: "./input", word: "Hello")
-
-print(result ?? "niled")
-
-
+print(frequency(ofWord: "I'm", fromFilename: "./input.txt"))
