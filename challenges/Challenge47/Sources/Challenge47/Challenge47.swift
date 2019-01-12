@@ -33,11 +33,17 @@ extension Collection {
     }
 }
 
-func upc(_ code: Int) -> Int {
-    let codeArray = Array(String(code)).map { Int(String($0))! }
-    let (odd, even) = codeArray.separatedFilter { $0 % 2 != 0 }
-    let oddResult = odd.reduce(0, +) * 3
-    let evenResult = even.reduce(0, +) + oddResult
+func upc(_ code: String) -> Int {
+    guard code.rangeOfCharacter(
+        from: CharacterSet(charactersIn: "0123456789").inverted) == nil else {
+            return 0
+    }
+    let leadingZeros = 11 - code.count
+    let padded =  String(repeating: "0", count: leadingZeros) + code
+    let codeArray = padded.map { Int(String($0))! }
+    let (odd, even) = (0..<codeArray.count).separatedFilter { $0 % 2 == 0 }
+    let oddResult = odd.reduce(0) { $0 + codeArray[$1] } * 3
+    let evenResult = even.reduce(0) { $0 + codeArray[$1] } + oddResult
     let m = evenResult % 10
     
     return m == 0 ? 0 : 10 - m

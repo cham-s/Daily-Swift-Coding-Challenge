@@ -6,10 +6,11 @@ final class Challenge47Tests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(upc(4210000526), 4)
-        XCTAssertEqual(upc(3600029145), 2)
-        XCTAssertEqual(upc(12345678910), 4)
-        XCTAssertEqual(upc(1234567), 0)
+        XCTAssertEqual(upc("03600029145"), 2)
+        XCTAssertEqual(upc("4210000526"), 4)
+        XCTAssertEqual(upc("3600029145"), 2)
+        XCTAssertEqual(upc("12345678910"), 4)
+        XCTAssertEqual(upc("1234567"), 0)
     }
 
     static var allTests = [
