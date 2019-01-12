@@ -9,7 +9,7 @@ final class Challenge47Tests: XCTestCase {
         XCTAssertEqual(upc(4210000526), 4)
         XCTAssertEqual(upc(3600029145), 2)
         XCTAssertEqual(upc(12345678910), 4)
-        XCTAssertEqual(upc(1234567), 4)
+        XCTAssertEqual(upc(1234567), 0)
     }
 
     static var allTests = [
