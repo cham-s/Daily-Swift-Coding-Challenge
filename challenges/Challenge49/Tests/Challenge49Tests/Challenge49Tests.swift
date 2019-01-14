@@ -29,6 +29,6 @@ final class Challenge49Tests: XCTestCase {
 
     static var allTests = [
         ("testExample", testExample),
-        ("testExample", testExample)
+        ("testBonus", testBonus)
     ]
 }
