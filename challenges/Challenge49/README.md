@@ -1,6 +1,6 @@
 # Challenge49
 
-##[[2019-01-14] Challenge #372 [Easy] Perfectly balanced](https://www.reddit.com/r/dailyprogrammer/comments/afxxca/20190114_challenge_372_easy_perfectly_balanced/)
+## [[2019-01-14] Challenge #372 [Easy] Perfectly balanced](https://www.reddit.com/r/dailyprogrammer/comments/afxxca/20190114_challenge_372_easy_perfectly_balanced/)
 
 
 Given a string containing only the characters x and y, find whether there are the same number of xs and ys.
