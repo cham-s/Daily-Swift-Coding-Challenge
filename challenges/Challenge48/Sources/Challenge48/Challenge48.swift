@@ -1,8 +1,9 @@
 import Foundation
 
 func hexColor(red: UInt8, green: UInt8, blue: UInt8) -> String {
-    let red = String(red, radix: 16).uppercased()
-    let green = String(green, radix: 16).uppercased()
-    let blue = String(blue, radix: 16).uppercased()
-    return "#\(red)\(green)\(blue)"
+    let pad: (UInt8) -> String = {
+        let result = String($0, radix: 16).uppercased()
+        return result.count > 1 ? result : "0\(result)"
+    }
+    return "#\(pad(red))\(pad(green))\(pad(blue))"
 }
