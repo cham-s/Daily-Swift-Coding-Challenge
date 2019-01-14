@@ -18,9 +18,12 @@ values of a color, find the hex string for that color. You may use anything buil
 language, such as for base conversion, but you can also do it manually.
 
 ### Examples
+
+```
 hexcolor(255, 99, 71) => "#FF6347"  (Tomato)
 hexcolor(184, 134, 11) => "#B8860B"  (DarkGoldenrod)
 hexcolor(189, 183, 107) => "#BDB76B"  (DarkKhaki)
 hexcolor(0, 0, 205) => "#0000CD"  (MediumBlue)
+```
 
 
