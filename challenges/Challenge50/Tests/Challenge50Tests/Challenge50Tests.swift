@@ -9,7 +9,7 @@ final class Challenge50Tests: XCTestCase {
         XCTAssertFalse(isLeap(1997))
         XCTAssertTrue(isLeap(1996))
         XCTAssertFalse(isLeap(1900))
-        XCTAssertTrue(isLeap(2000))
+        XCTAssertTrue(isLeap(2400))
     }
 
     static var allTests = [
