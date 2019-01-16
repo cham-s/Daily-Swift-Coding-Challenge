@@ -1,17 +1,17 @@
 # Daily Swift Coding Challenge  💻 💪🏽 [![Build Status](https://travis-ci.com/cham-s/Daily-Swift-Coding-Challenge.svg?branch=master)](https://travis-ci.com/cham-s/Daily-Swift-Coding-Challenge) 
 
+## Challenges done so far: [53](https://github.com/cham-s/Daily-Swift-Coding-Challenge/tree/master/challenges) ✅
+
 In order to get a better undertanding of the Swift programming language I took
 the challenge of trying to solve coding challenges every day.
 
-The challenges mainly comes from The Swift Coding Challenge written by Paul hudson.
-I really recommend the book, as it tests your current knolwedge of the language.
-The repo contains my own implementation of the solutions. The order does not particularly follows 
-the book.
+Challenges come from:
 
-I intend to expand the sources of the challenges after finishing the book.
-r/dailyprogrammer is also a great source for coding challenges.
+* [Swift Coding Challenges By Paul Hudson](https://www.hackingwithswift.com)
+* [reddit: r/dailyprogrammer](https://www.reddit.com/r/dailyprogrammer/)
+* [exercism](https://exercism.io)
 
-The code mainly runs on macOSX platform
+The code mainly runs on macOSX platform.
 
 
 ## How to test each code
@@ -35,11 +35,11 @@ All basic packages have the following structure:
 ├── Package.swift
 ├── README.md
 ├── Sources
-│   └── Challenge3
-│       └── Challenge3.swift
+│   └── unique
+│       └── unique.swift
 └── Tests
 ├── Challenge3Tests
-│   ├── Challenge3Tests.swift
+│   ├── uniqueTests.swift
 │   └── XCTestManifests.swift
 └── LinuxMain.swift
 ```
