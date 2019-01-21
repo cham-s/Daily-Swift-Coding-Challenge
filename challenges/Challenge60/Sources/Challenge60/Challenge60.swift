@@ -33,6 +33,26 @@ struct ListOps {
         for item in source {
             array = ListOps.append(array, [transform(item)])
         }
-        
+        return array
+    }
+    
+    static func foldLeft(_ source: [Int], accumulated: Int,
+                         combine: (Int, Int) -> Int) -> Int {
+        var result = accumulated
+        for item in source {
+            result = combine(result, item)
+        }
+        return result
+    }
+    
+    static func reverse ()
+    
+    static func foldRight(_ source: [Int], accumulated: Int,
+                         combine: (Int, Int) -> Int) -> Int {
+        var result = accumulated
+        for item in source.reversed() {
+            result = combine(result, item)
+        }
+        return result
     }
 }
