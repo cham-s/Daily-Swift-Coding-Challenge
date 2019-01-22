@@ -1,11 +1,4 @@
 
-//protocol List {
-//    associatedtype Element
-//    static func append(_ destination: [Element],
-//                       _ source: [Element]) -> [Element]
-//    static func  concat(_ destination: [Element],
-//                        _ list: [Element]) -> [Element]
-//}
 
 
 struct ListOps {
@@ -64,7 +57,7 @@ struct ListOps {
                                    combine: (Element, Element) -> Element) -> Element {
         var result = accumulated
         for item in ListOps.reverse(source) {
-            result = combine(result, item)
+            result = combine(item, result)
         }
         return result
     }
@@ -73,7 +66,6 @@ struct ListOps {
         let count = ListOps.length(source)
         var index = count - 1
         var array: [Element] = []
-        
         
         while index >= 0 {
             array = ListOps.append(array, [source[index]])
