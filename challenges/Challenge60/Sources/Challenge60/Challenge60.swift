@@ -1,18 +1,30 @@
+
+//protocol List {
+//    associatedtype Element
+//    static func append(_ destination: [Element],
+//                       _ source: [Element]) -> [Element]
+//    static func  concat(_ destination: [Element],
+//                        _ list: [Element]) -> [Element]
+//}
+
+
 struct ListOps {
-    static func append(_ destination: [Int], _ source: [Int]) -> [Int] {
+    static func append<Element>(_ destination: [Element],
+                                _ source: [Element]) -> [Element] {
         return destination + source
     }
     
-    static func concat(_ destination: [Int], _ list: [Int]...) -> [Int] {
-        var array = destination
+    static func concat<Element>(_ list: [Element]...) -> [Element] {
+        var array: [Element] = []
         for item in list {
-            array = ListOps.append(destination, item)
+            array = ListOps.append(array, item)
         }
         return array
     }
     
-    static func filter(_ source: [Int], predicate: (Int) -> Bool) -> [Int] {
-        var array: [Int] = []
+    static func filter<Element>(_ source: [Element],
+                                _ predicate: (Element) -> Bool) -> [Element] {
+        var array: [Element] = []
         for item in source where predicate(item) == true {
             array = ListOps.append(array, [item])
         }
@@ -20,7 +32,7 @@ struct ListOps {
         
     }
     
-    static func length(_ source: [Int]) -> Int {
+    static func length<Element>(_ source: [Element]) -> Int {
         var count = 0
         for _ in source {
             count += 1
@@ -28,16 +40,18 @@ struct ListOps {
         return count
     }
     
-    static func map(_ source: [Int], _ transform: (Int) -> Int) -> [Int] {
-        var array: [Int] = []
+    static func map<Element>(_ source: [Element],
+                             _ transform: (Element) -> Element) -> [Element] {
+        var array: [Element] = []
         for item in source {
             array = ListOps.append(array, [transform(item)])
         }
         return array
     }
     
-    static func foldLeft(_ source: [Int], accumulated: Int,
-                         combine: (Int, Int) -> Int) -> Int {
+    static func foldLeft<Element>(_ source: [Element],
+                                  accumulated: Element,
+                                  combine: (Element, Element) -> Element) -> Element {
         var result = accumulated
         for item in source {
             result = combine(result, item)
@@ -45,14 +59,27 @@ struct ListOps {
         return result
     }
     
-    static func reverse ()
-    
-    static func foldRight(_ source: [Int], accumulated: Int,
-                         combine: (Int, Int) -> Int) -> Int {
+    static func foldRight<Element>(_ source: [Element],
+                                   accumulated: Element,
+                                   combine: (Element, Element) -> Element) -> Element {
         var result = accumulated
-        for item in source.reversed() {
+        for item in ListOps.reverse(source) {
             result = combine(result, item)
         }
         return result
+    }
+    
+    static func reverse<Element>(_ source: [Element]) -> [Element] {
+        let count = ListOps.length(source)
+        var index = count - 1
+        var array: [Element] = []
+        
+        
+        while index >= 0 {
+            array = ListOps.append(array, [source[index]])
+            index -= 1
+        }
+        
+        return array
     }
 }
