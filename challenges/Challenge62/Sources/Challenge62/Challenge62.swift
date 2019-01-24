@@ -8,16 +8,7 @@ struct Clock: Equatable {
     }
     
     init(hours: Int, minutes: Int = 0) {
-        updateMinutes(withMinutes: minutes)
-        updateHours(withHours: hours)
-    }
-    
-    mutating func add(minutes: Int) {
-        self.minutes += minutes
-    }
-    
-    mutating func subtract(minutes: Int) {
-        self.minutes -= minutes
+        updateClock(withHours: hours, andMinutes: minutes)
     }
     
     mutating func updateHours(withHours: Int) {
@@ -30,7 +21,9 @@ struct Clock: Equatable {
     
     mutating func updateMinutes(withMinutes: Int) {
         let h = withMinutes / 60
+        print("/ 60 is \(h)")
         var m = withMinutes % 60
+        
         if h > 0 {
             updateHours(withHours: h)
         }
@@ -39,5 +32,26 @@ struct Clock: Equatable {
             m += 60
         }
         minutes = m
+    }
+    
+    mutating func updateClock(withHours: Int, andMinutes: Int) {
+        switch (withHours, andMinutes) {
+        case (let hour, let minute) where hour >= 0 && minute >= 0:
+            let currentMinutes = (hours * 60) + minutes
+            let addedTotal = (hour * 60 + minute) + currentMinutes
+            hours = addedTotal / 60
+            minutes = addedTotal % 60
+        case (let hour, let minute) where hour < 0 && minute >= 0:
+            let currentMinutes = (hours * 60) + minutes
+            let addedTotal = (hour * 60 + minute) + currentMinutes
+            hours = addedTotal / 60
+            minutes = addedTotal % 60
+        case (let hour, let minute) where hour >= 0 && minute < 0:
+            let currentMinutes = (hours * 60) + minutes
+            let addedTotal = (hour * 60 - minute) + currentMinutes
+            hours = addedTotal / 60
+            minutes = addedTotal % 60
+            
+        }
     }
 }
