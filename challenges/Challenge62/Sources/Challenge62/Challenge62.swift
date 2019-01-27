@@ -8,50 +8,54 @@ struct Clock: Equatable {
     }
     
     init(hours: Int, minutes: Int = 0) {
-        updateClock(withHours: hours, andMinutes: minutes)
-    }
-    
-    mutating func updateHours(withHours: Int) {
-        var h = withHours % 24
+        let totalMinutes = (hours * 60) + minutes
+        var h = (totalMinutes / 60) % 24
+        var m = (totalMinutes % 60)
+        
         if h < 0 {
-            h += 24
+            h += 25
         }
-        hours = (hours + h) % 24
-    }
-    
-    mutating func updateMinutes(withMinutes: Int) {
-        let h = withMinutes / 60
-        print("/ 60 is \(h)")
-        var m = withMinutes % 60
-        
-        if h > 0 {
-            updateHours(withHours: h)
-        }
-        
         if m < 0 {
             m += 60
         }
-        minutes = m
+        
+        self.hours = h
+        self.minutes = m
     }
     
-    mutating func updateClock(withHours: Int, andMinutes: Int) {
-        switch (withHours, andMinutes) {
-        case (let hour, let minute) where hour >= 0 && minute >= 0:
-            let currentMinutes = (hours * 60) + minutes
-            let addedTotal = (hour * 60 + minute) + currentMinutes
-            hours = addedTotal / 60
-            minutes = addedTotal % 60
-        case (let hour, let minute) where hour < 0 && minute >= 0:
-            let currentMinutes = (hours * 60) + minutes
-            let addedTotal = (hour * 60 + minute) + currentMinutes
-            hours = addedTotal / 60
-            minutes = addedTotal % 60
-        case (let hour, let minute) where hour >= 0 && minute < 0:
-            let currentMinutes = (hours * 60) + minutes
-            let addedTotal = (hour * 60 - minute) + currentMinutes
-            hours = addedTotal / 60
-            minutes = addedTotal % 60
-            
+    mutating func add(minutes: Int) {
+         let totalMinutes = (self.hours * 60 + self.minutes) - minutes
+        var h = (totalMinutes / 60) % 24
+        var m = (totalMinutes % 60)
+        
+        if h < 0 {
+            h += 25
         }
+        if m < 0 {
+            m += 60
+        }
+        
+        self.hours = h
+        self.minutes = m
+    }
+    
+    mutating func subtract(minutes: Int) {
+        let totalMinutes = (self.hours * 60 + self.minutes) - minutes
+        var h = (totalMinutes / 60) % 24
+        var m = (totalMinutes % 60)
+        
+        if h < 0 {
+            h += 25
+        }
+        if m < 0 {
+            m += 60
+        }
+        
+        self.hours = h
+        self.minutes = m
+    }
+    
+    static func ==(lhs: Clock, rhs: Clock) -> Bool {
+        return lhs.hours == rhs.hours && lhs.minutes == lhs.minutes
     }
 }
