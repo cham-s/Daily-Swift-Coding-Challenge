@@ -22,10 +22,10 @@ struct Triangle {
         if firstSide == secondSide && firstSide == thirdSide {
             return "Equilateral"
         }
-        if firstSide == secondSide && firstSide == thirdSide ||
-            secondSide == firstSide && secondSide == thirdSide {
+        if firstSide == secondSide ||  secondSide == thirdSide ||
+           firstSide == thirdSide  {
             return "Isosceles"
         }
-        return "Isosceles"
+        return "Scalene"
     }
 }
