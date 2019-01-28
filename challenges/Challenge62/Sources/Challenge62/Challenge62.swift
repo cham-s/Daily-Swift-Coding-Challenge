@@ -8,28 +8,31 @@ struct Clock: Equatable {
     }
     
     init(hours: Int, minutes: Int = 0) {
-        let totalMinutes = (hours * 60) + minutes
-        var h = (totalMinutes / 60) % 24
-        var m = (totalMinutes % 60)
-        
+        var h = minutes + (60 * hours)
+        var m = h % 60
+        if m < 0 {
+            h += m
+        }
+        h /= 60
+        h  %= 24
         if h < 0 {
-            h += 25
+            h += 24
         }
         if m < 0 {
             m += 60
         }
         
-        self.hours = h
-        self.minutes = m
+        self.hours = h == 24 ? 0 : h
+        self.minutes = m == 60 ? 0 : m
     }
     
     mutating func add(minutes: Int) {
-         let totalMinutes = (self.hours * 60 + self.minutes) - minutes
-        var h = (totalMinutes / 60) % 24
-        var m = (totalMinutes % 60)
-        
+        var h = minutes + (60 * hours)
+        var m = h % 60
+        h += m
+        h /= 60
         if h < 0 {
-            h += 25
+            h += 24
         }
         if m < 0 {
             m += 60
@@ -40,20 +43,19 @@ struct Clock: Equatable {
     }
     
     mutating func subtract(minutes: Int) {
-        let totalMinutes = (self.hours * 60 + self.minutes) - minutes
-        var h = (totalMinutes / 60) % 24
-        var m = (totalMinutes % 60)
-        
+        var h = minutes + (60 * hours)
+        var m = h % 60
+        h += m
+        h /= 60
         if h < 0 {
-            h += 25
+            h += 24
         }
         if m < 0 {
             m += 60
         }
         
         self.hours = h
-        self.minutes = m
-    }
+        self.minutes = m    }
     
     static func ==(lhs: Clock, rhs: Clock) -> Bool {
         return lhs.hours == rhs.hours && lhs.minutes == lhs.minutes
