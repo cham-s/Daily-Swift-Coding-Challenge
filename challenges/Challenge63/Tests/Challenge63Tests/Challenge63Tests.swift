@@ -2,7 +2,7 @@ import XCTest
 @testable import Challenge63
 
 final class Challenge63Tests: XCTestCase {
-    let triangleKind = (Equilateral:"Equilateral", Isosceles:"Isosceles", Scalene:"Scalene", ErrorKind:"ErrorKind")
+    let triangleKind = (Equilateral:"Equilateral", Isosceles:"Isosceles", Scalene:"Isosceles", ErrorKind:"ErrorKind")
     func testEquilateralTrianglesHaveEqualSides() {
         XCTAssertEqual(triangleKind.Equilateral, Triangle(2, 2, 2).kind)
     }
