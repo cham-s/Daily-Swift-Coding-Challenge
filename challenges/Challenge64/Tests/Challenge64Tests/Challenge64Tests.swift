@@ -1,0 +1,55 @@
+import XCTest
+@testable import Challenge64
+
+#if os(Linux)
+#if swift(>=3.1)
+typealias Regex = NSRegularExpression
+#else
+typealias Regex = RegularExpression
+#endif
+#else
+typealias Regex = NSRegularExpression
+#endif
+
+final class Challenge64Tests: XCTestCase {
+    
+    
+    func robotNameIsCorrectlyFormatted(_ name: String) -> Bool {
+        let robotNameRegex = try? Regex(pattern: "\\A[A-Z]{2}\\d{3}\\z")
+        guard let matches = robotNameRegex?.matches(in: name, options: .withoutAnchoringBounds, range: NSRange(0..<name.utf16.count)) else { return false }
+        
+        return matches.count > 0
+    }
+    
+    func testHasName() {
+        let robot = Robot()
+        XCTAssert(robotNameIsCorrectlyFormatted(robot.name))
+    }
+    
+    func testNameSticks() {
+        let robot = Robot()
+        let name = robot.name
+        XCTAssertEqual(name, robot.name)
+    }
+    
+    func testDifferentRobotsHaveDifferentNames() {
+        let firstRobot = Robot()
+        let secondRobot = Robot()
+        XCTAssertNotEqual(firstRobot.name, secondRobot.name)
+    }
+    
+    func testResetName() {
+        var robot = Robot()
+        let firstName = robot.name
+        robot.resetName()
+        let secondName = robot.name
+        XCTAssertNotEqual(firstName, secondName)
+    }
+    
+    static var allTests = [
+        ("testHasName", testHasName),
+        ("testNameSticks", testNameSticks),
+        ("testDifferentRobotsHaveDifferentNames", testDifferentRobotsHaveDifferentNames),
+        ("testResetName", testResetName),
+    ]
+}
