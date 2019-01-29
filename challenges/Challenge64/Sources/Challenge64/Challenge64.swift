@@ -6,14 +6,13 @@ struct Robot {
     
     init() {
         name = generateName()
-        Robot.names.insert(name)
     }
     
     mutating func resetName() {
         Robot.names.remove(name)
         name = generateName()
     }
-        
+    
     private func generateName() ->  String {
         let upperAlpha = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         let numbers = "0123456789"
