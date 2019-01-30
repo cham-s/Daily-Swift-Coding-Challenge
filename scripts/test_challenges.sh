@@ -10,7 +10,8 @@ declare -a valid=("Challenge01" "Challenge02" "Challenge03" "Challenge04" \
 	"Challenge44" "Challenge46" "Challenge47" "Challenge48" "Challenge49" \
 	"Challenge50" "Challenge51" "Challenge52" "Challenge53" "Challenge54" \
 	"Challenge55" "Challenge56" "Challenge57" "Challenge58" "Challenge59" \
-	"Challenge60" "Challenge61" "Challenge63" "Challenge64"
+	"Challenge60" "Challenge61" "Challenge63" "Challenge64" "Challenge65" \
+
 	)
 
 # TODO: more dynamic approach with a filter for testable packages.
