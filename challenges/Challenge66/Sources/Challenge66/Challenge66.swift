@@ -4,17 +4,22 @@ enum Plant: Character, CaseIterable {
     case radishes = "R"
     case clover = "C"
     case grass = "G"
-    case violet = "V"
+    case violets = "V"
 }
+
 struct Garden {
+    static var classChildren = ["Alice", "Bob", "Charlie", "David", "Eve",
+                                "Fred", "Ginny", "Harriet", "Ileana", "Joseph",
+                                "Kincaid", "Larry"]
     var children: [String] = []
+
     var diagram = ""
-    var plantsOwner: [String: Plant] = [:]
+    var plantsOwner: [String: [Plant]] = [:]
     
     
-    init(_ diagram: String, children: [String] = []) {
+    init(_ diagram: String, children: [String] = Garden.classChildren) {
         guard isInputCorrectFor(diagram, children) else { return }
-        self.children = children
+        self.children = children.sorted()
         self.diagram = diagram
         populatePlantsOwner()
     }
@@ -33,9 +38,6 @@ struct Garden {
             guard level.rangeOfCharacter(from: invalidSet) == nil else {
                 return false
             }
-            guard level.count / 2 == children.count else {
-                return false
-            }
         }
         return true
     }
@@ -45,26 +47,30 @@ struct Garden {
         self.children = []
     }
     
-    func plantForChild(_ name: String) -> [Plant] {
-        return [.clover]
+    func plantsForChild(_ name: String) -> [Plant] {
+        return plantsOwner[name] ?? []
     }
     
     private mutating func populatePlantsOwner() {
         let levels = diagram.components(separatedBy: "\n")
         guard levels.isEmpty == false else { return }
-        var lowerBound = 0
-        var index = 0
+        
         for level in levels {
-            let count = level.count
-            for upperBound in stride(from: 0, to: count + 2, by: 2) {
+            var lowerBound = 0
+            var index = 0
+            let count = level.count + 2
+            for upperBound in stride(from: 0, to: count, by: 2) {
                 guard upperBound != 0 else { continue }
-                print("\(upperBound)")
                 let startIndex = level.index(level.startIndex, offsetBy: lowerBound)
                 let lastIndex = level.index(level.startIndex, offsetBy: upperBound)
                 let plantSymbols = level[startIndex..<lastIndex]
                 for symbol in plantSymbols {
                     let name = children[index]
-                    plantsOwner[name] = Plant(rawValue: symbol)!
+                    if  plantsOwner[name] != nil {
+                        plantsOwner[name]!.append(Plant(rawValue: symbol)!)
+                    } else {
+                        plantsOwner[name] = [Plant(rawValue: symbol)!]
+                    }
                 }
                 lowerBound = upperBound
                 index += 1
