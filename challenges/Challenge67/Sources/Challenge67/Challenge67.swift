@@ -32,8 +32,6 @@ struct Queens {
             return true
         }
         
-        //return diagonalCheck()
-        white = (row: self.white[0], col: self.white[1])
         for _ in 0...maxColAndRow - self.white[0] {
             if white == black { return true }
             white.row += 1
@@ -58,7 +56,6 @@ struct Queens {
             white.col -= 1
             
         }
-        
         
         // backward diagonal right
         white = (row: self.white[0], col: self.white[1])
