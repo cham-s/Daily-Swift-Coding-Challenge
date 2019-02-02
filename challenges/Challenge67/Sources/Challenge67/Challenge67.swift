@@ -1,7 +1,7 @@
 import Foundation
 
 
-struct Queen {
+struct Queens {
     var white: [Int] = []
     var black: [Int] = []
     private let maxColAndRow = 7
@@ -19,51 +19,64 @@ struct Queen {
                     ouput += col == maxColAndRow ? "_" : "_ "
                 }
             }
-            ouput += "\n"
+            ouput += row == maxColAndRow ? "" : "\n"
         }
         return ouput
     }
     
     var canAttack: Bool {
-        let white = (row: self.white[0], col: self.white[1])
+        var white = (row: self.white[0], col: self.white[1])
         let black = (row: self.black[0], col: self.black[1])
         
-        guard white.col != black.col || white.row != black.row else {
+        guard white.col != black.col && white.row != black.row else {
             return true
+        }
+        
+        //return diagonalCheck()
+        white = (row: self.white[0], col: self.white[1])
+        for _ in 0...maxColAndRow - self.white[0] {
+            if white == black { return true }
+            white.row += 1
+            white.col += 1
+            
+        }
+        
+        // backward diagonal left
+        white = (row: self.white[0], col: self.white[1])
+        for _ in 0...self.white[0] {
+            if white == black { return true }
+            white.row -= 1
+            white.col -= 1
+            
+        }
+        
+        // advance diagonal left
+        white = (row: self.white[0], col: self.white[1])
+        for _ in 0...self.maxColAndRow - self.white[0] {
+            if white == black { return true }
+            white.row += 1
+            white.col -= 1
+            
+        }
+        
+        
+        // backward diagonal right
+        white = (row: self.white[0], col: self.white[1])
+        for _ in 0...self.white[0] {
+            if white == black { return true }
+            white.row -= 1
+            white.col += 1
+            
         }
         
         return false
     }
     
-    
     enum InitError: Error {
         case incorrectNumberOfCoordinates
-        case incorectCoordinates
+        case incorrectCoordinates
+        case invalidCoordinates
         case sameSpace
-    }
-    
-    mutating func displayChange() {
-        
-        let white = (row: self.white[0], col: self.white[1])
-        let black = (row: self.black[0], col: self.black[1])
-        
-        let forewardRow = Array(white.row...white.col + 1)
-        let forewardCol = Array(white.col...maxColAndRow)
-        let backwardRow = (0...white.row).reversed()
-        let backwardCol = (0...white.col).reversed()
-        
-        print("foreward row: \(forewardRow)")
-        print("backward row: \(backwardRow)")
-        print("foreward col: \(forewardCol)")
-        print("backward col: \(backwardCol)")
-        
-        
-        for (index, col) in forewardCol.enumerated() {
-            let row = forewardRow[index]
-            self.white = [row, col]
-            print(self.description)
-        }
-        
     }
     
     init(white: [Int] = [0, 3], black: [Int] = [7, 3]) throws {
@@ -81,7 +94,7 @@ struct Queen {
         }
         for value in white + black {
             guard value >= 0 && value <= 7 else {
-                throw InitError.incorectCoordinates
+                throw InitError.invalidCoordinates
             }
         }
     }

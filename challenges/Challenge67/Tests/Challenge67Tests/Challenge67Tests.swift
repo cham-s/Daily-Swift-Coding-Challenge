@@ -26,19 +26,19 @@ final class Challenge67Tests: XCTestCase {
     
     func testIncorrectNumberOfCoordinates() {
         XCTAssertThrowsError(_ = try Queens(white: [1, 2, 3], black: [4, 5])) { error in
-            XCTAssertEqual(error as? Queens.InitError, .incorrectNumberOfCoordinates)
+            XCTAssertEqual(error as? Queens.InitError, Queens.InitError.incorrectNumberOfCoordinates)
         }
     }
     
     func testInvalidCoordinates() {
         XCTAssertThrowsError(_ = try Queens(white: [-3, 0], black: [2, 481])) { error in
-            XCTAssertEqual(error as? Queens.InitError, .invalidCoordinates)
+            XCTAssertEqual(error as? Queens.InitError,  Queens.InitError.invalidCoordinates)
         }
     }
     
     func testCannotOccupySameSpace() {
         XCTAssertThrowsError(_ = try Queens(white: [2, 4], black: [2, 4])) { error in
-            XCTAssertEqual(error as? Queens.InitError, .sameSpace)
+            XCTAssertEqual(error as? Queens.InitError,  Queens.InitError.sameSpace)
         }
     }
     
