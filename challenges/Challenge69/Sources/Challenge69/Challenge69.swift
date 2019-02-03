@@ -1,42 +1,32 @@
+
 struct Sieve {
     var limit = 0
     
-    var primes: [Int] {
+    lazy var primes: [Int] = {
         guard limit > 2 else {
             return []
         }
         
         var primes: [Int] = []
-        var numbers = (2...limit).map {  (number: $0, marked: false)  }
-        var primeIndex = 0
-        var numberIndex = 1
+        var marked: Set<Int> = []
+        let numbers = 2...limit
         
-        while numbers[primeIndex].number != limit {
-            guard !numbers[numberIndex].marked else {
-                primeIndex += 1
-                numberIndex = primeIndex + 1
-                continue
+        for i in numbers.indices where !marked.contains(numbers[i]) {
+            primes.append(numbers[i])
+            for number in numbers[i...] where number != numbers[i] &&
+                !marked.contains(number) {
+                    if number % numbers[i] == 0 {
+                        marked.insert(number)
+                    }
             }
-            primes.append(numbers[primeIndex].number)
-            while numbers[numberIndex].number != limit {
-                guard !numbers[numberIndex].marked else {
-                    numberIndex += 1
-                    continue
-                }
-                if numbers[numberIndex].number % numbers[primeIndex].number == 0 {
-                    numbers[numberIndex].marked = true
-                }
-                numberIndex += 1
-            }
-            primeIndex += 1
-            numberIndex = primeIndex + 1
         }
-        
         return primes
-    }
+    }()
     
     init(_ limit: Int) {
         self.limit = limit
     }
 }
+
+
 

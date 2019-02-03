@@ -4,7 +4,8 @@ import XCTest
 final class Challenge69Tests: XCTestCase {
     func testAFewPrimes() {
         let expected = [2, 3, 5, 7]
-        XCTAssertEqual(expected, Sieve(10).primes)
+        var sieve = Sieve(10)
+        XCTAssertEqual(expected, sieve.primes)
     }
     
     func testPrimes() {
@@ -24,7 +25,8 @@ final class Challenge69Tests: XCTestCase {
             881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967,
             971, 977, 983, 991, 997
         ]
-        XCTAssertEqual(expected, Sieve(1000).primes)
+        var sieve = Sieve(1000)
+        XCTAssertEqual(expected, sieve.primes)
     }
 
 
