@@ -1,12 +1,8 @@
-
 struct Sieve {
     var limit = 0
     
     lazy var primes: [Int] = {
-        guard limit > 2 else {
-            return []
-        }
-        
+        guard limit > 2 else { return [] }
         var primes: [Int] = []
         var marked: Set<Int> = []
         let numbers = 2...limit
@@ -27,6 +23,7 @@ struct Sieve {
         self.limit = limit
     }
 }
+
 
 
 
