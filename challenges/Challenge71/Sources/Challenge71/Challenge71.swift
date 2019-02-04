@@ -1,12 +1,5 @@
 import Foundation
 
-struct Code {
-    var area = "000"
-    var exchange = "000"
-    var subscriber = "0000"
-    var number = "0000000000"
-}
-
 struct PhoneNumber {
     var areaCode = "000"
     var exchangeCode = "000"
@@ -40,10 +33,7 @@ struct PhoneNumber {
         self.subscriber = String(filtered[endtExchange..<filtered.endIndex])
         self.number = filtered
     }
-    
 }
-
-
 
 extension PhoneNumber: CustomStringConvertible {
     var description: String {
