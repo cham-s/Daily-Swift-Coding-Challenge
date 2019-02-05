@@ -6,124 +6,130 @@ final class Challenge72Tests: XCTestCase {
     
     func testRobotBearingEast() {
         robot.orient(.east)
-        XCTAssertEqual([.east], [robot.bearing])
+        XCTAssertEqual([Orientation.east], [robot.bearing])
     }
     
     func testRobotBearingWest() {
         robot.orient(.west)
-        XCTAssertEqual([.west], [robot.bearing])
+        XCTAssertEqual([Orientation.west], [robot.bearing])
     }
     
     func testRobotBearingNorth() {
         robot.orient(.north)
-        XCTAssertEqual([.north], [robot.bearing])
+        XCTAssertEqual([Orientation.north], [robot.bearing])
     }
     
     func testRobotBearingSouth() {
         robot.orient(.south)
-        XCTAssertEqual([.south], [robot.bearing])
+        XCTAssertEqual([Orientation.south], [robot.bearing])
     }
     
     func testTurnRightFromNorth() {
         robot.orient(.north)
         robot.turnRight()
-        XCTAssertEqual([.east], [robot.bearing])
+        XCTAssertEqual([Orientation.east], [robot.bearing])
     }
     
     func testTurnRightFromEast() {
         robot.orient(.east)
         robot.turnRight()
-        XCTAssertEqual([.south], [robot.bearing])
+        XCTAssertEqual([Orientation.south], [robot.bearing])
     }
     
     func testTurnRightFromSouth() {
         robot.orient(.south)
         robot.turnRight()
-        XCTAssertEqual([.west], [robot.bearing])
+        XCTAssertEqual([Orientation.west], [robot.bearing])
     }
     
     func testTurnRightFromWest() {
         robot.orient(.west)
         robot.turnRight()
-        XCTAssertEqual([.north], [robot.bearing])
+        XCTAssertEqual([Orientation.north], [robot.bearing])
     }
     
     func testTurnLeftFromNorth() {
         robot.orient(.north)
         robot.turnLeft()
-        XCTAssertEqual([.west], [robot.bearing])
+        XCTAssertEqual([Orientation.west], [robot.bearing])
     }
     
     func testTurnLeftFromEast() {
         robot.orient(.east)
         robot.turnLeft()
-        XCTAssertEqual([.north], [robot.bearing])
+        XCTAssertEqual([Orientation.north], [robot.bearing])
     }
     
     func testTurnLeftFromSouth() {
         robot.orient(.south)
         robot.turnLeft()
-        XCTAssertEqual([.east], [robot.bearing])
+        XCTAssertEqual([Orientation.east], [robot.bearing])
     }
     
     func testTurnLeftFromWest() {
         robot.orient(.west)
         robot.turnLeft()
-        XCTAssertEqual([.south], [robot.bearing])
+        XCTAssertEqual([Orientation.south], [robot.bearing])
     }
     
     func testRobotCoordinates() {
         robot.at(x: 3, y: 0)
-        XCTAssertEqual([3, 0], robot.coordinates)
+        let coordinates = (x: 3, y: 0)
+        XCTAssertTrue(coordinates == robot.coordinates)
     }
     
     func testOtherRobotCoordinates() {
         robot.at(x: -2, y: 5)
-        XCTAssertEqual([-2, 5], robot.coordinates)
+        let coordinates = (x: -2, y: 5)
+        XCTAssertTrue(coordinates == robot.coordinates)
     }
     
     func testAdvanceWhenFacingNorth() {
         robot.at(x: 0, y: 0)
         robot.orient(.north)
         robot.advance()
-        XCTAssertEqual([0, 1], robot.coordinates)
+        let coordinates = (x: 0, y: 1)
+        XCTAssertTrue(coordinates == robot.coordinates)
     }
     
     func testAdvanceWhenFacingEast() {
         robot.at(x: 0, y: 0)
         robot.orient(.east)
         robot.advance()
-        XCTAssertEqual([1, 0], robot.coordinates)
+        let coordinates = (x: 1, y: 0)
+        XCTAssertTrue(coordinates == robot.coordinates)
     }
     
     func testAdvanceWhenFacingSouth() {
         robot.at(x: 0, y: 0)
         robot.orient(.south)
         robot.advance()
-        XCTAssertEqual([0, -1], robot.coordinates)
+        let coordinates = (x: 0, y: -1)
+        XCTAssertTrue(coordinates == robot.coordinates)
     }
     
     func testAdvanceWhenFacingWest() {
         robot.at(x: 0, y: 0)
         robot.orient(.west)
         robot.advance()
-        XCTAssertEqual([-1, 0], robot.coordinates)
+        let coordinates = (x: -1, y: 0)
+        XCTAssertTrue(coordinates == robot.coordinates)
     }
     
     func testInstructionForTurningLeft() {
-        XCTAssertEqual([.turnLeft], robot.instructions("L"))
+        XCTAssertEqual([Instruction.turnLeft], robot.instructions("L"))
     }
     
     func testInstructionForTurningRight() {
-        XCTAssertEqual([.turnRight], robot.instructions("R"))
+        XCTAssertEqual([Instruction.turnRight], robot.instructions("R"))
     }
     
     func testInstructionForAdvancing() {
-        XCTAssertEqual([.advance], robot.instructions("A"))
+        XCTAssertEqual([Instruction.advance], robot.instructions("A"))
     }
     
     func testSeriesOfInstructions() {
-        XCTAssertEqual([.turnRight, .advance, .advance, .turnLeft], robot.instructions("RAAL"))
+        XCTAssertEqual([Instruction.turnRight, Instruction.advance, Instruction.advance, Instruction.turnLeft], robot.instructions("RAAL"))
     }
     
     func testInstructRobot() {
@@ -131,8 +137,9 @@ final class Challenge72Tests: XCTestCase {
         robot.place(x: -2, y: 1, direction: .east)
         robot.evaluate("RLAALAL")
         
-        XCTAssertEqual([0, 2], robot.coordinates)
-        XCTAssertEqual([.west], [robot.bearing])
+        let coordinates = (x: 0, y: 2)
+        XCTAssertTrue(coordinates == robot.coordinates)
+        XCTAssertEqual([Orientation.west], [robot.bearing])
     }
     
     func testInstructManyRobots() {
@@ -146,14 +153,17 @@ final class Challenge72Tests: XCTestCase {
         robot2.evaluate("RRAAAAALA")
         robot3.evaluate("LAAARRRALLLL")
         
-        XCTAssertEqual([-4, 1], robot1.coordinates)
-        XCTAssertEqual([.west], [robot1.bearing])
+        var coordinates = (x: -4, y: 1)
+        XCTAssertTrue(coordinates == robot1.coordinates)
+        XCTAssertEqual([Orientation.west], [robot1.bearing])
         
-        XCTAssertEqual([-3, -8], robot2.coordinates)
-        XCTAssertEqual([.south], [robot2.bearing])
+        coordinates = (x: -3, y: -8)
+        XCTAssertTrue(coordinates == robot2.coordinates)
+        XCTAssertEqual([Orientation.south], [robot2.bearing])
         
-        XCTAssertEqual([11, 5], robot3.coordinates)
-        XCTAssertEqual([.north], [robot3.bearing])
+        coordinates = (x: 11, y: 5)
+        XCTAssertTrue(coordinates == robot3.coordinates)
+        XCTAssertEqual([Orientation.north], [robot3.bearing])
     }
 
     static var allTests = [
