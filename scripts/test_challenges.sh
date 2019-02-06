@@ -12,7 +12,7 @@ declare -a valid=("Challenge01" "Challenge02" "Challenge03" "Challenge04" \
 	"Challenge55" "Challenge56" "Challenge57" "Challenge58" "Challenge59" \
 	"Challenge60" "Challenge61" "Challenge63" "Challenge64" "Challenge65" \
 	"Challenge66" "Challenge67" "Challenge68" "Challenge69" "Challenge70" \
-	"Challenge71" "Challenge72" "Challenge73"
+	"Challenge71" "Challenge72" "Challenge73" "Challenge73"
 
 	)
 
