@@ -4,19 +4,19 @@ struct IsbnVerifier {
     
     static func isValid(_ input: String) -> Bool {
         
-        let striped = input.filter { $0 != "-" }
-        guard striped.count == 10 else { return false }
+        let stripped = input.filter { $0 != "-" }
+        guard stripped.count == 10 else { return false }
         
         let invalidSet = CharacterSet(charactersIn: "0123456789X").inverted
-        guard striped.rangeOfCharacter(from: invalidSet) == nil else { return false }
+        guard stripped.rangeOfCharacter(from: invalidSet) == nil else { return false }
         
-        if let xIndex = striped.lastIndex(of: "X") {
-            guard xIndex == striped.index(before: striped.endIndex) else {
+        if let xIndex = stripped.lastIndex(of: "X") {
+            guard xIndex == stripped.index(before: stripped.endIndex) else {
                 return false
             }
         }
         
-        let numbers: [Int] = striped.map { Int(String($0)) ?? 10 }
+        let numbers: [Int] = stripped.map { Int(String($0)) ?? 10 }
         var result = 0
         for (index, value) in (1...10).reversed().enumerated() {
             result += numbers[index] * value
