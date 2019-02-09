@@ -10,7 +10,7 @@ struct IsbnVerifier {
         let invalidSet = CharacterSet(charactersIn: "0123456789X").inverted
         guard striped.rangeOfCharacter(from: invalidSet) == nil else { return false }
         
-        if let xIndex = striped.firstIndex(of: "X") {
+        if let xIndex = striped.lastIndex(of: "X") {
             guard xIndex == striped.index(before: striped.endIndex) else {
                 return false
             }
