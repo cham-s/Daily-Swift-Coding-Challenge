@@ -85,7 +85,7 @@ final class Challenge82Tests: XCTestCase {
     func testPentatonic() {
         let pentatonic = ScaleGenerator(tonic: "A", scaleName: "pentatonic", pattern: "MMAMA")
         XCTAssertEqual(pentatonic.pitches(), ["A", "B", "C#", "E", "F#"])
-    }
+    }`
     
     func testEnigmatic() {
         let enigmatic = ScaleGenerator(tonic: "G", scaleName: "enigma", pattern: "mAMMMmm")
