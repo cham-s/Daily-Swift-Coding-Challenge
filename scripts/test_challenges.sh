@@ -14,7 +14,7 @@ declare -a valid=("Challenge01" "Challenge02" "Challenge03" "Challenge04" \
 	"Challenge66" "Challenge67" "Challenge68" "Challenge69" "Challenge70" \
 	"Challenge71" "Challenge72" "Challenge73" "Challenge74" "Challenge75" \
 	"Challenge76" "Challenge77" "Challenge78" "Challenge79" "Challenge80" \
-	"Challenge81" "Challenge84" "Challenge83"
+	"Challenge81" "Challenge83" "Challenge84" "Challenge85"
 	)
 
 # TODO: more dynamic approach with a filter for testable packages.
