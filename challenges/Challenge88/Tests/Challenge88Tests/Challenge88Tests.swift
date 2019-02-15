@@ -51,7 +51,6 @@ final class Challenge88Tests: XCTestCase {
         XCTAssertEqual("2012-12-07", meetUp.day(dayOfWeek.Friday, which: whichOptions.first).description)
     }
     
-    
     static var allTests = [
         ("testMonteenthOfMay2013", testMonteenthOfMay2013),
         ("testSaturteenthOfFebruary2013", testSaturteenthOfFebruary2013),
