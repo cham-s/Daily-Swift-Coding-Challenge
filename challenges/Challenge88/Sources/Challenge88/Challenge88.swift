@@ -66,10 +66,10 @@ public extension Calendar {
                                to: firstDay)!
             return date(for: day, range: weekDayRange, to: nthWeek)
         case .last:
-            let weekOffset = range(of: .weekOfMonth,
-                                   in: .month,
-                                   for: firstDay)!.upperBound - 1
             
+            let weekOffset = range(of: .day,
+                                   in: .month,
+                                   for: firstDay)!.upperBound / 7
             let lastWeek = date(byAdding: .weekOfMonth,
                                 value: weekOffset,
                                 to: firstDay)!
