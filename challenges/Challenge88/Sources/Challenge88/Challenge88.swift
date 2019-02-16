@@ -1,9 +1,31 @@
 import Foundation
 
+typealias Day = Int
+typealias Month = Int
+typealias Year = Int
+typealias Option = String
+
 public extension DateFormatter {
     func format(withLocal: String, andFormat: String) {
         self.locale = Locale(identifier: withLocal)
         self.dateFormat = andFormat
+    }
+}
+
+enum DayOfWeek: Int {
+    case sunday = 1
+    case monday
+    case tuesday
+    case wednesday
+    case thursday
+    case friday
+    case saturday
+    
+    init (day: Day) throws {
+        guard let dayOfweek = DayOfWeek(rawValue: day) else {
+            throw DescriptorError.invalidDayComponent(day)
+        }
+        self = dayOfweek
     }
 }
 
@@ -13,72 +35,65 @@ enum DescriptorError: Error {
     case invalidDate(String)
 }
 
+enum Descriptor {
+    case ordinal(Int)
+    case last
+    case teenth
+    
+    init (_ descriptor: String) throws {
+        switch descriptor {
+        case "1st", "2nd", "3rd", "4th":
+            self = .ordinal(Int(String(descriptor.first!))! - 1)
+        case "last":
+            self = .last
+        case "teenth":
+            self = .teenth
+        default:
+            throw DescriptorError.notValidDescriptor(descriptor)
+        }
+    }
+}
 
-struct Meetup {
-    typealias Day = Int
-    typealias Month = Int
-    typealias Year = Int
-    typealias Option = String
+public extension Calendar {
+    public var weekDayRange: Range<Int> { return 0..<7 }
+    public var teenthRange: Range<Int> { return 12..<19 }
     
-    enum Descriptor {
-        case ordinal(Int)
-        case last
-        case teenth(ClosedRange<Int>)
-        
-        init (_ descriptor: String) throws {
-            switch descriptor {
-            case "1st", "2nd", "3rd", "4th":
-                self = .ordinal(Int(String(descriptor.first!))! - 1)
-            case "last":
-                self = .last
-            case "teenth":
-                self = .teenth(12...18)
-            default:
-                throw DescriptorError.notValidDescriptor(descriptor)
-            }
-        }
-        
-        func date(for day: DayOfWeek, date: Date) -> Date {
-            let calendar = Calendar.current
+    internal func date(for descriptor: Descriptor, day: DayOfWeek, firstDay: Date) -> Date? {
+        switch descriptor {
+        case .ordinal(let nth):
+            let nthWeek = date(byAdding: .weekOfMonth,
+                               value: nth,
+                               to: firstDay)!
+            return date(for: day, range: weekDayRange, to: nthWeek)
+        case .last:
+            let weekOffset = range(of: .weekOfMonth,
+                                   in: .month,
+                                   for: firstDay)!.upperBound - 1
             
-            
-            switch self {
-            case .ordinal(let nthDay):
-                let advanceWeek = calendar.date(byAdding: .weekOfMonth,
-                                                value: nthDay,
-                                                to: date)
-                for i in 0..<7 {
-                    let currentDay = calendar.date(byAdding: .day, value: i, to: date)!
-                    if calendar.component(.weekday, from: currentDay) == day.rawValue {
-                        currentDay
-                    }
-                }
-            case .last:
-                
-            default:
-                <#code#>
-            }
+            let lastWeek = date(byAdding: .weekOfMonth,
+                                value: weekOffset,
+                                to: firstDay)!
+            return date(for: day, range: weekDayRange, to: lastWeek)
+        case .teenth:
+            return date(for: day, range: teenthRange, to: firstDay)
         }
     }
     
-    enum DayOfWeek: Int {
-        case sunday = 1
-        case monday
-        case tuesday
-        case wednesday
-        case thursday
-        case friday
-        case saturday
-        
-        init (day: Day) throws {
-            guard let dayOfweek = DayOfWeek(rawValue: day) else {
-                throw DescriptorError.invalidDayComponent(day)
+    private func date(for day: DayOfWeek, range: Range<Int>, to: Date ) -> Date? {
+        for i in range {
+            let currentDay = date(byAdding: .day,
+                                  value: i,
+                                  to: to)!
+            if component(.weekday, from: currentDay) == day.rawValue {
+                return currentDay
             }
-            self = dayOfweek
         }
+        return nil
     }
-    
-    public struct MeetUpDate: CustomStringConvertible {
+}
+
+class Meetup {
+    public struct MeetupDate: CustomStringConvertible {
         public var year: Year = 0
         public var month: Month = 0
         public var day: Day = 0
@@ -89,7 +104,7 @@ struct Meetup {
         }
         
         public var description: String {
-            return "\(year)-\(month)-\(day)"
+            return String(format: "%d-%02d-%02d", year, month, day)
         }
         
         public mutating func update(with dayOfWeek: Day, andOption: Option) throws {
@@ -102,18 +117,32 @@ struct Meetup {
             guard let date = dateFormatter.date(from: dateStr) else {
                 throw DescriptorError.invalidDate(dateStr)
             }
+            let calendar = Calendar.current
+            let rightDate = calendar.date(for: descriptor,
+                                          day: day,
+                                          firstDay: date)
+            self.day = calendar.component(.day, from: rightDate!)
         }
     }
     
-    private var date: MeetUpDate
+    private var date: MeetupDate
     
     init(year: Year, month: Month) {
-        date = MeetUpDate(year: year, month: month)
+        date = MeetupDate(year: year, month: month)
     }
     
-    //    func day(_ on: Day, wich: Option) -> MeetUpDate {
-    //
-    //        return MeetUpDate
-    //    }
+    func day(_ on: Day, which: Option) -> MeetupDate {
+        do {
+            try date.update(with: on, andOption: which)
+        } catch DescriptorError.invalidDate(let date) {
+            fatalError("Invalid Date: \(date)")
+        } catch DescriptorError.invalidDayComponent(let day) {
+            fatalError("Invalid Day Component: \(day)")
+        } catch DescriptorError.notValidDescriptor(let descriptor) {
+            fatalError("Invalid descriptor: \(descriptor)")
+        } catch {
+            fatalError("Error: \(error.localizedDescription)")
+        }
+        return date
+    }
 }
-
