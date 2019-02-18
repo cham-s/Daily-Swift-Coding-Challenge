@@ -1,6 +1,12 @@
 import XCTest
 @testable import Challenge91
 
+private extension XCTest {
+    func XCTAssertEqualMultiArray(_ aArray1: [[Int]], _ aArray2: [[Int]]) {
+        XCTAssertEqual(Array(aArray1.joined()), Array(aArray2.joined()))
+    }
+}
+
 final class Challenge91Tests: XCTestCase {
     func testSimpleSlicesOfOne() {
         let series = Series("01234")
