@@ -1,5 +1,3 @@
-import Foundation
-
 class Element<T> {
     var value: T?
     var next: Element?
@@ -27,36 +25,25 @@ class Element<T> {
     }
     
     func reverseElements() -> Element {
-        var fast = next?.next
-        var slow = next
+        var previous: Element? = nil
+        var current: Element? = self
+        var next: Element?
         
-        while fast != nil {
-            fast?.next = slow
-            fast = fast?.next
-            slow = slow?.next
+        while current != nil {
+            next = current?.next
+            current?.next = previous
+            previous = current
+            current = next
         }
-        return self
+        
+        return previous!
     }
     
-    private func link(previous element: Element) {
-        
-        if let nextElement = element.next {
-            link(previous: nextElement)
-            next?.next = element
-        }
-        next = element
+    static func fromArray(_ array: [T]) -> Element {
+        guard array.isEmpty == false else { return Element() }
+        guard array.count > 1 else { return Element(array[0], nil) }
+        return (1..<array.count).reduce(Element(array[0], nil)) {
+            Element(array[$1], $0)
+        }.reverseElements()
     }
 }
-
-let elementNil = Element<Int>()
-let elementOne = Element(1, nil)
-let elementTwo = Element(2, elementOne)
-let elementThree = Element(3, elementTwo)
-let rev = elementThree.reverseElements()
-
-rev.toArray()
-
-//elementNil.toArray()
-//elementOne.toArray()
-//elementTwo.toArray()
-//elementThree.toArray()
