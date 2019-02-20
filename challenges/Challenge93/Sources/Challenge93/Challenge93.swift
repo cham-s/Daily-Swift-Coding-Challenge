@@ -5,18 +5,16 @@ struct Matrix {
             .map { $0.split(separator: " ")
                 .map { Int(String($0))! } }
     }
+    
     var columns: [[Int]] {
-        let rows = strMatrix.split(separator: "\n")
         var array: [[Int]] = []
-        
         let count = rows.first!.count
         
         for col in 0..<count {
             var numbers: [Int] = []
             for row in rows {
-                if let number = Int(String(Array(row)[col])) {
-                    numbers.append(number)
-                }
+                let number = Int(String(Array(row)[col]))!
+                numbers.append(number)
             }
             array.append(numbers)
         }
