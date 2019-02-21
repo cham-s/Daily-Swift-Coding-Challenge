@@ -1,3 +1,7 @@
-struct Challenge94 {
-    var text = "Hello, World!"
+struct Base {
+    static func outputDigits(inputBase: Int,
+                             inputDigits: [Int],
+                             outputBase: Int) -> [Int] {
+        let result
+    }
 }
