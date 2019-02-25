@@ -1,4 +1,5 @@
 import Foundation
+
 struct Triplet {
     var values: [Int] = []
     var sum: Int {
@@ -10,29 +11,36 @@ struct Triplet {
     }
     
     var isPythagorean: Bool {
-        return isValidTriplet(values[0], values[1], values[2])
+        return Triplet.isValidTriplet(values) != nil
     }
     
-    private func isValidTriplet(_ a: Int, _ b: Int, _ c: Int) -> Bool {
-        if sqrt(Double(a)) * sqrt(Double(b)) == sqrt(Double(c)) {
-            return true
+    static private func isValidTriplet(_ input: [Int]) -> Int? {
+        guard input.count == 3 else { return nil }
+        for i in 0..<input.count {
+            let (a, b, c) = (input[i], input[(i + 1) % 3], input[(i + 2) % 3])
+            let result = pow(Double(a), 2) + pow(Double(b), 2)
+            if result == pow(Double(c), 2) {
+                return input.reduce(1, *)
+            }
         }
-        if sqrt(Double(c)) * sqrt(Double(a)) == sqrt(Double(b)) {
-            return true
-        }
-        
-        if sqrt(Double(b)) * sqrt(Double(c)) == sqrt(Double(a)) {
-            return true
-        }
-        return false
+        return nil
     }
     
     init(_ f: Int, _ s: Int, _ t: Int) {
         values.append(contentsOf: [f, s, t])
     }
     
-    public func fromWhere(_ minFactor: Int = 0, maxFactor: Int) -> [Int] {
+    static public func fromWhere(_ minFactor: Int = 0, maxFactor: Int) -> [Int] {
+        let range = Array(minFactor...maxFactor)
+        guard range.count >= 3 else { return [] }
+        var array: [Int] = []
+        let limit = range.count - 3
         
+        for offSet in stride(from: 0, through: limit, by: 1) {
+            if let result = isValidTriplet(Array(range[offSet..<offSet + 3])) {
+                array.append(result)
+            }
+        }
+        return array
     }
-
 }
