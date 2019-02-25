@@ -30,15 +30,21 @@ struct Triplet {
         values.append(contentsOf: [f, s, t])
     }
     
-    static public func fromWhere(_ minFactor: Int = 0, maxFactor: Int) -> [Int] {
+    static public func fromWhere(_ minFactor: Int = 1, maxFactor: Int) -> [Int] {
         let range = Array(minFactor...maxFactor)
         guard range.count >= 3 else { return [] }
         var array: [Int] = []
-        let limit = range.count - 3
-        
-        for offSet in stride(from: 0, through: limit, by: 1) {
-            if let result = isValidTriplet(Array(range[offSet..<offSet + 3])) {
-                array.append(result)
+        var count = 0
+        for a in minFactor...maxFactor {
+            for b in minFactor + 1...maxFactor {
+                for c in minFactor + 3...maxFactor {
+                    count += 1
+                    let input = [a, b, c]
+                    print(input)
+                    if let result = isValidTriplet(input) {
+                        array.append(result)
+                    }
+                }
             }
         }
         return array
