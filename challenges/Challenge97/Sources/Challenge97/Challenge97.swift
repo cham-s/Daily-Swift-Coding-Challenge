@@ -54,6 +54,34 @@ struct Triplet {
         }
         return array
     }
+    
+    static public func fromWhere(_ minFactor: Int = 1, maxFactor: Int, sum: Int) -> [Triplet] {
+        let range = Array(minFactor...maxFactor)
+        guard range.count >= 3 else { return [] }
+        var array: [Triplet] = []
+        var a = minFactor
+        var b = minFactor + 1
+        var c = minFactor + 2
+        
+        while a <= maxFactor {
+            b = a + 1
+            while b <= maxFactor {
+                c = b + 1
+                while c <= maxFactor {
+                    if isValidTriplet([a, b, c]) {
+                        let triplet = Triplet(a, b, c)
+                        if triplet.sum == sum {
+                            array.append(triplet)
+                        }
+                    }
+                    c += 1
+                }
+                b += 1
+            }
+            a += 1
+        }
+        return array
+    }
 }
 
 
