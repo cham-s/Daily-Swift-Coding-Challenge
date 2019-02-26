@@ -83,5 +83,3 @@ struct Triplet {
         return array
     }
 }
-
-
