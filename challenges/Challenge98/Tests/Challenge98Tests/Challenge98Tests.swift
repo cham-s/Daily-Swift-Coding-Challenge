@@ -1,6 +1,13 @@
 import XCTest
 @testable import Challenge98
 
+private extension XCTest {
+    func XCTAssertEqualMultiArray(_ aArray1: [[Int]], _ aArray2: [[Int]]) {
+        XCTAssertEqual(Array(aArray1.joined()), Array(aArray2.joined()))
+    }
+}
+
+
 final class Challenge98Tests: XCTestCase {
     func testExtractARow() {
         let matrix = SaddlePointsMatrix("1 2\n10 20")

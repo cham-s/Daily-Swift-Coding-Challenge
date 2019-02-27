@@ -14,6 +14,18 @@ struct SaddlePointsMatrix {
         }
     }
     
+    var saddlePoints: [[Int]] {
+        var array: [[Int]] = []
+        for (i, row) in rows.enumerated() {
+            for (j, col)  in columns.enumerated() {
+                if rows[i][j] == row.max()! && rows[i][j] == col.min()! {
+                    array.append([i, j])
+                }
+            }
+        }
+        return array
+    }
+    
     init(_ matrix: String) {
         matrixStr = matrix
     }
