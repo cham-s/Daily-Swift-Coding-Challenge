@@ -1,3 +1,11 @@
-struct Challenge100 {
-    var text = "Hello, World!"
+struct PrimeFactors {
+    private var number: Int
+    
+    public var toArray: Int {
+        return (2)
+    }
+    
+    init(_ number: Int) {
+        self.number =  number
+    }
 }
