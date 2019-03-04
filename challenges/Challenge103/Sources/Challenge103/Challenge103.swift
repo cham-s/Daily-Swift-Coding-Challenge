@@ -1,10 +1,6 @@
 import Foundation
 
 
-class Node<T: Comparable> {
-    
-}
-
 class BinarySearchTree<T: Comparable> {
     public var data: T
     public var right: BinarySearchTree?
@@ -15,11 +11,17 @@ class BinarySearchTree<T: Comparable> {
     }
     
     public func insert(_ value: T) {
-        var tmp: BinarySearchTree? =  self
-        while let current = tmp {
-            tmp = value < current.data ? current.left : current.right
+        var tmp =  self
+        if value > data {
+            while let current = tmp.right { tmp = current }
+            tmp.right = BinarySearchTree(value)
+        } else {
+            while let current = tmp.left { tmp = current }
+            tmp.left = BinarySearchTree(value)
         }
-        tmp = BinarySearchTree(value)
     }
+    
+    
 }
+
 
