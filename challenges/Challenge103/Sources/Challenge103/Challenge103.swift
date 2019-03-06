@@ -1,5 +1,3 @@
-import Foundation
-
 class BinarySearchTree<T: Comparable> {
     public var data: T
     public var right: BinarySearchTree?
@@ -10,14 +8,21 @@ class BinarySearchTree<T: Comparable> {
     }
     
     public func insert(_ value: T) {
-        var tmp =  self
-        if value > data {
-            while let current = tmp.right { tmp = current }
-            tmp.right = BinarySearchTree(value)
-        } else {
-            while let current = tmp.left { tmp = current }
-            tmp.left = BinarySearchTree(value)
+        func check(bt: BinarySearchTree) {
+            let side = value > bt.data ? bt.right : bt.left
+            let isRight = value > bt.data ? true : false
+            
+            guard side != nil else {
+                if isRight {
+                    bt.right = BinarySearchTree(value)
+                } else {
+                    bt.left = BinarySearchTree(value)
+                }
+                return
+            }
+            check(bt: side!)
         }
+        check(bt: self)
     }
     
     public func allData() -> [T] {
@@ -37,10 +42,8 @@ class BinarySearchTree<T: Comparable> {
             array.append(node.data)
         }
         
-        //digLeft(node: self)
+        digLeft(node: self)
         digRight(node: self)
         return array
     }
 }
-
-
