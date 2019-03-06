@@ -1,3 +1,6 @@
+import Foundation
+
+
 class BinarySearchTree<T: Comparable> {
     public var data: T
     public var right: BinarySearchTree?
@@ -10,17 +13,15 @@ class BinarySearchTree<T: Comparable> {
     public func insert(_ value: T) {
         func check(bt: BinarySearchTree) {
             let side = value > bt.data ? bt.right : bt.left
-            let isRight = value > bt.data ? true : false
-            
-            guard side != nil else {
-                if isRight {
+            guard let currentSide = side else {
+                if value > bt.data {
                     bt.right = BinarySearchTree(value)
                 } else {
                     bt.left = BinarySearchTree(value)
                 }
                 return
             }
-            check(bt: side!)
+            check(bt: currentSide)
         }
         check(bt: self)
     }
