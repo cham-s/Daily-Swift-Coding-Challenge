@@ -1,6 +1,3 @@
-import Foundation
-
-
 class BinarySearchTree<T: Comparable> {
     public var data: T
     public var right: BinarySearchTree?
@@ -11,40 +8,35 @@ class BinarySearchTree<T: Comparable> {
     }
     
     public func insert(_ value: T) {
-        func check(bt: BinarySearchTree) {
-            let side = value > bt.data ? bt.right : bt.left
+        func insertIn(_ bst: BinarySearchTree) {
+            let side = value > bst.data ? bst.right : bst.left
             guard let currentSide = side else {
-                if value > bt.data {
-                    bt.right = BinarySearchTree(value)
+                if value > bst.data {
+                    bst.right = BinarySearchTree(value)
+                } else if value == bst.data {
+                    bst.data = value
                 } else {
-                    bt.left = BinarySearchTree(value)
+                    bst.left = BinarySearchTree(value)
                 }
                 return
             }
-            check(bt: currentSide)
+            insertIn(currentSide)
         }
-        check(bt: self)
+        insertIn(self)
     }
     
     public func allData() -> [T] {
         
         var array: [T] = []
         
-        func digLeft(node: BinarySearchTree) {
-            if let leftSide = node.left {
-                digLeft(node: leftSide)
+        func traverse(_ node: BinarySearchTree?) {
+            if let node = node {
+                traverse(node.left)
+                array.append(node.data)
+                traverse(node.right)
             }
-            array.append(node.data)
         }
-        func digRight(node: BinarySearchTree) {
-            if let rightSide = node.right {
-                digRight(node: rightSide)
-            }
-            array.append(node.data)
-        }
-        
-        digLeft(node: self)
-        digRight(node: self)
+        traverse(self)
         return array
     }
 }
