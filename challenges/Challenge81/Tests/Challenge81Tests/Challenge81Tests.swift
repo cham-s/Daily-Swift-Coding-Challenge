@@ -3,7 +3,7 @@ import XCTest
 
 final class Challenge81Tests: XCTestCase {
     func testReadEmptyBufferThrowsBufferEmptyException() {
-        var buffer = CircularBuffer<Int>(capacity: 1)
+        let buffer = CircularBuffer<Int>(capacity: 1)
         
         XCTAssertThrowsError(try buffer.read()) { error in
             XCTAssertEqual(error as? CircularBufferError, .bufferEmpty)
@@ -11,7 +11,7 @@ final class Challenge81Tests: XCTestCase {
     }
     
     func testWriteAndReadBackOneItem() {
-        var buffer = CircularBuffer<Int>(capacity: 1)
+        let buffer = CircularBuffer<Int>(capacity: 1)
         try? buffer.write(1)
         XCTAssertEqual(try? buffer.read(), 1)
         XCTAssertThrowsError(try buffer.read()) { error in
@@ -20,7 +20,7 @@ final class Challenge81Tests: XCTestCase {
     }
     
     func testWriteAndReadBackMultipleItems() {
-        var buffer = CircularBuffer<Int>(capacity: 2)
+        let buffer = CircularBuffer<Int>(capacity: 2)
         try? buffer.write(1)
         try? buffer.write(2)
         XCTAssertEqual(try? buffer.read(), 1)
@@ -31,7 +31,7 @@ final class Challenge81Tests: XCTestCase {
     }
     
     func testClearingBuffer() {
-        var buffer = CircularBuffer<Int>(capacity: 3)
+        let buffer = CircularBuffer<Int>(capacity: 3)
         (1...3).forEach {
             try? buffer.write($0)
         }
@@ -47,7 +47,7 @@ final class Challenge81Tests: XCTestCase {
     }
     
     func testAlternateWriteAndRead() {
-        var buffer = CircularBuffer<Int>(capacity: 2)
+        let buffer = CircularBuffer<Int>(capacity: 2)
         try? buffer.write(1)
         XCTAssertEqual(try? buffer.read(), 1)
         try? buffer.write(2)
@@ -55,7 +55,7 @@ final class Challenge81Tests: XCTestCase {
     }
     
     func testReadsBackOldestItem() {
-        var buffer = CircularBuffer<Int>(capacity: 3)
+        let buffer = CircularBuffer<Int>(capacity: 3)
         try? buffer.write(1)
         try? buffer.write(2)
         XCTAssertEqual(try? buffer.read(), 1)
@@ -65,7 +65,7 @@ final class Challenge81Tests: XCTestCase {
     }
     
     func testWritingToAFullBufferThrowsAnException() {
-        var buffer = CircularBuffer<String>(capacity: 2)
+        let buffer = CircularBuffer<String>(capacity: 2)
         try? buffer.write("1")
         try? buffer.write("2")
         XCTAssertThrowsError(try buffer.write("A")) { error in
@@ -74,7 +74,7 @@ final class Challenge81Tests: XCTestCase {
     }
     
     func testOverwritingOldestItemInAFullBuffer() {
-        var buffer = CircularBuffer<String>(capacity: 2)
+        let buffer = CircularBuffer<String>(capacity: 2)
         try? buffer.write("1")
         try? buffer.write("2")
         buffer.overwrite("A")
@@ -86,7 +86,7 @@ final class Challenge81Tests: XCTestCase {
     }
     
     func testForcedWritesToNonFullBufferShouldBehaveLikeWrites() {
-        var buffer = CircularBuffer<String>(capacity: 2)
+        let buffer = CircularBuffer<String>(capacity: 2)
         buffer.overwrite("1")
         buffer.overwrite("2")
         XCTAssertEqual(try? buffer.read(), "1")
@@ -97,7 +97,7 @@ final class Challenge81Tests: XCTestCase {
     }
     
     func testAlternateReadAndWriteIntoBufferOverflow() {
-        var buffer = CircularBuffer<Int>(capacity: 5)
+        let buffer = CircularBuffer<Int>(capacity: 5)
         (1...3).forEach { try? buffer.write($0) }
         _ = try? buffer.read()
         _ = try? buffer.read()
@@ -116,7 +116,7 @@ final class Challenge81Tests: XCTestCase {
         }
     }
 
-    static var allTests = [
+    static let allTests = [
         ("testReadEmptyBufferThrowsBufferEmptyException", testReadEmptyBufferThrowsBufferEmptyException),
         ("testWriteAndReadBackOneItem", testWriteAndReadBackOneItem),
         ("testWriteAndReadBackMultipleItems", testWriteAndReadBackMultipleItems),
