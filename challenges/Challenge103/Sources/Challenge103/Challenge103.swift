@@ -13,8 +13,6 @@ class BinarySearchTree<T: Comparable> {
             guard let currentSide = side else {
                 if value > bst.data {
                     bst.right = BinarySearchTree(value)
-                } else if value == bst.data {
-                    bst.data = value
                 } else {
                     bst.left = BinarySearchTree(value)
                 }
