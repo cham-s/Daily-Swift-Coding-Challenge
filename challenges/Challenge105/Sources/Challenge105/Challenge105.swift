@@ -40,7 +40,7 @@ struct OCR {
         guard colCount > 1 else {
             return [] + [lines]
         }
-        return (1..<colCount).reduce([]) { partial, colIndex in
+        return (0..<colCount).reduce([]) { partial, colIndex in
             let m: [String] =  lines.map {
                 let start = $0.index($0.startIndex,
                                      offsetBy: colIndex * maxColSize)
