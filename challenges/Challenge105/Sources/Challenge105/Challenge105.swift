@@ -13,7 +13,7 @@ struct OCR {
     }
     
     private let correspondingOCR = [
-        "_ \n| |\n|_|\n   ": "0",
+        " _ \n| |\n|_|\n   ": "0",
         "   \n  |\n  |\n   ": "1",
         " _ \n _|\n|_ \n   ": "2",
         " _ \n _|\n _|\n   ": "3",
@@ -37,6 +37,9 @@ struct OCR {
         let isOK: (String) -> Bool = { $0.count.isDivisibleBy(self.maxColSize) }
         guard let first = lines.first(where: isOK) else { return [] }
         let colCount = first.count / maxColSize
+        guard colCount > 1 else {
+            return [] + [lines]
+        }
         return (1..<colCount).reduce([]) { partial, colIndex in
             let m: [String] =  lines.map {
                 let start = $0.index($0.startIndex,
