@@ -57,7 +57,7 @@ struct OCR {
     
     public func converted() throws -> String {
         var output = ""
-        
+        print(columns)
         for col in columns {
             let number = col.joined(separator: "\n")
             guard number.count.isDivisibleBy(maxColSize)   else {
@@ -66,11 +66,7 @@ struct OCR {
             guard col.count == maxLineSize else {
                 throw OCRError.invalidNumberOfLines
             }
-            if let value = correspondingOCR[number] {
-                output += value
-            } else {
-                return "?"
-            }
+            output += correspondingOCR[number] ?? "?"
         }
         return output
     }
