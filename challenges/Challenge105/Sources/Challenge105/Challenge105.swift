@@ -22,18 +22,19 @@ struct OCR {
         " _ \n|_ \n|_|\n   ": "6",
         " _ \n  |\n  |\n   ": "7",
         " _ \n|_|\n|_|\n   ": "8",
-        " _ \n|_|\n _|\n   ": "9"
+        " _ \n|_|\n _|\n   ": "9",
+        "   \n   \n   \n   ": ","
     ]
     
     private var input: String
     private let maxColSize = 3
     private let maxLineSize = 4
     
-    private var lines: [String] {
+    public var lines: [String] {
         return input.split(separator: "\n").map { String($0) }
     }
     
-    private var columns: [[String]] {
+    public var columns: [[String]] {
         let isOK: (String) -> Bool = { $0.count.isDivisibleBy(self.maxColSize) }
         guard let first = lines.first(where: isOK) else { return [] }
         let colCount = first.count / maxColSize
@@ -57,7 +58,7 @@ struct OCR {
     
     public func converted() throws -> String {
         var output = ""
-        print(columns)
+        
         for col in columns {
             let number = col.joined(separator: "\n")
             guard number.count.isDivisibleBy(maxColSize)   else {
