@@ -1,17 +1,13 @@
-func RomanNumeral(number: Int) -> String {
+import Foundation
+
+func RomanNumeral(_ number: Int) -> String {
     let roman = [
         1 : "I",
-        2 : "II",
-        3 : "III",
-        4 : "IV",
         5 : "V",
-        6 : "VI",
-        7 : "VII",
-        8 : "VIII",
-        9 : "IX",
         10: "X",
         50: "L",
         100: "C",
+        500: "D",
         1000: "M"
     ]
     let strNumber = String(number).reversed()
@@ -23,8 +19,44 @@ func RomanNumeral(number: Int) -> String {
         decomposed.append((key, Int(String(value))!))
         power += 1
     }
-    print(Array(decomposed.reversed()))
     
-    
-    return ""
+    return decomposed.reversed().reduce("") { partial, n in
+        switch n {
+        case (1, let times):
+            var returnValue = ""
+            if times < 4 {
+                returnValue = String(repeating: "I", count: times)
+            } else if times == 4 {
+                returnValue = "IV"
+            } else if times < 9 {
+                returnValue == "V" + String(repeating: "I", count: times - 1)
+            } else {
+                returnValue = "IX"
+            }
+            return partial + returnValue
+            
+        case (10, let times):
+            var returnValue = ""
+            if times < 4 {
+                returnValue = String(repeating: "X", count: times)
+            } else if times == 4 {
+                returnValue = "XL"
+            } else if times < 9 {
+                returnValue = "L" + String(repeating: "X", count: times - 5)
+            } else {
+                returnValue = "XC"
+            }
+            return partial + returnValue
+        case (let 100, let times):
+            var returnValue = ""
+            if times < 4 {
+                returnValue = String(repeating: "C", count: times)
+            } else if times == 4 {
+                returnValue =
+            }
+            
+        default:
+            return partial + String(repeating: Character(roman[n.0]!), count: n.1)
+        }
+    }
 }
