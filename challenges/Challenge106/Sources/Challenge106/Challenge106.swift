@@ -1,15 +1,6 @@
 import Foundation
 
 func RomanNumeral(_ number: Int) -> String {
-    let roman = [
-        1 : "I",
-        5 : "V",
-        10: "X",
-        50: "L",
-        100: "C",
-        500: "D",
-        1000: "M"
-    ]
     let strNumber = String(number).reversed()
     var decomposed: [(Int, Int)] = []
     var power = 0
@@ -29,7 +20,7 @@ func RomanNumeral(_ number: Int) -> String {
             } else if times == 4 {
                 returnValue = "IV"
             } else if times < 9 {
-                returnValue == "V" + String(repeating: "I", count: times - 1)
+                returnValue = "V" + String(repeating: "I", count: times - 5)
             } else {
                 returnValue = "IX"
             }
@@ -47,16 +38,20 @@ func RomanNumeral(_ number: Int) -> String {
                 returnValue = "XC"
             }
             return partial + returnValue
-        case (let 100, let times):
+        case (100, let times):
             var returnValue = ""
             if times < 4 {
                 returnValue = String(repeating: "C", count: times)
             } else if times == 4 {
-                returnValue =
+                returnValue = "CD"
+            } else if times < 9 {
+                returnValue = "D" + String(repeating: "C", count: times - 5)
+            } else {
+                returnValue = "CM"
             }
-            
+            return partial + returnValue
         default:
-            return partial + String(repeating: Character(roman[n.0]!), count: n.1)
+            return partial + String(repeating: "M", count: n.1)
         }
     }
 }
