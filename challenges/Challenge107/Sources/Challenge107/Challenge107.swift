@@ -1,3 +1,5 @@
+import Foundation
+
 public extension Character {
     public var alphabet : [Character] {
         return Array("abcdefghijklmnopqrstuwxyz")
@@ -14,14 +16,24 @@ public extension Character {
         return isLowercase
     }
     
-    public var ceasared: Character? {
+    public func ceasar(shiftKey: Character = "d") -> Character? {
         guard isAlpha else { return nil }
-        let ceasrOffSet = 3
+        let ceasrOffSet = alphabet.firstIndex(of: shiftKey)!
         let index = (alphabet.firstIndex(of: self)! + ceasrOffSet) % 26
         return alphabet[index]
     }
+}
+
+struct Cipher {
+    public var key: String
     
-    public func ceasar(shift: Int) -> Character? {
-        
+    init(key: String = "") {
+        self.key = key
+    }
+    
+    public func encode(_ input: String) -> String? {
+        guard key.first(where: { !$0.isAlpha }) == nil else { return nil }
+        return ""
     }
 }
+
