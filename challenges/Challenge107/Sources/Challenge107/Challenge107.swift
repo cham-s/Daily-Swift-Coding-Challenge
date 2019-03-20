@@ -1,8 +1,8 @@
 import Foundation
 
 public extension Character {
-    public var alphabet : [Character] {
-        return Array("abcdefghijklmnopqrstuwxyz")
+    private var alphabet : [Character] {
+        return Array("abcdefghijklmnopqrstuvwxyz")
     }
     public var isAlpha: Bool {
         return alphabet.contains(self) ||
@@ -13,7 +13,7 @@ public extension Character {
         return alphabet.contains(self)
     }
     public var isUppercase: Bool {
-        return isLowercase
+        return !isLowercase
     }
     
     public func ceasar(shiftKey: Character = "d") -> Character? {
@@ -24,16 +24,28 @@ public extension Character {
     }
 }
 
+let char = "iamapandabear".map { $0.ceasar()! }
+
+
 struct Cipher {
     public var key: String
     
-    init(key: String = "") {
+    init?(key: String = "d") {
+        guard !key.isEmpty else { return nil }
+        guard key.first(where: { $0.isUppercase }) == nil else { return nil }
+        guard key.first(where: { !$0.isAlpha }) == nil else { return nil }
         self.key = key
     }
     
     public func encode(_ input: String) -> String? {
         guard key.first(where: { !$0.isAlpha }) == nil else { return nil }
-        return ""
+        guard input.count == key.count else { return nil }
+        
+        return String(zip(input, key).map { $0.0.ceasar(shiftKey: $0.1)! })
+    }
+    
+    public func decode() {
+        
     }
 }
 
