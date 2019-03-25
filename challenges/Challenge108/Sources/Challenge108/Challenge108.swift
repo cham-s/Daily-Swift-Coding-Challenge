@@ -1,15 +1,15 @@
 struct Say {
-    public let number: String
+    public let number: Int
     
     init(_ number: Int) {
-        self.number = String(number)
+        self.number = number
     }
     
     public func say() -> String {
-        var decompose = number.reversed().enumerated().map {
-            ($0.offset, Int(String($0.element))!)
-            }.reversed()
-        print(decompose)
+        var tmp = number
+        while tmp > 0 {
+            
+        }
         return ""
     }
 }
