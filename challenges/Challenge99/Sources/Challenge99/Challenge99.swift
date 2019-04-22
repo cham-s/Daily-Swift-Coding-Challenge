@@ -1,3 +1,17 @@
+public extension IntegerLiteralType {
+    func factorial() -> IntegerLiteralType {
+        guard self > 1 else { return 1 }
+        return (1...self).reversed().reduce(1) { $0 * $1 }
+    }
+}
+
+public extension IntegerLiteralType {
+    func choose(k: IntegerLiteralType) -> IntegerLiteralType {
+        return self.factorial() / (k.factorial() * (self - k).factorial())
+    }
+}
+
+
 class PascalsTriangle {
     
     private var size: Int
