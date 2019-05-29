@@ -1,5 +1,10 @@
 # Daily Swift Coding Challenge  💻 💪🏽 [![Build Status](https://travis-ci.com/cham-s/Daily-Swift-Coding-Challenge.svg?branch=master)](https://travis-ci.com/cham-s/Daily-Swift-Coding-Challenge) 
 
+
+![swift logo](https://upload.wikimedia.org/wikipedia/commons/2/20/Swift_logo_with_text.svg) 
+**5.0.1**
+
+
 ## Challenges done so far: [103](https://github.com/cham-s/Daily-Swift-Coding-Challenge/tree/master/challenges) ✅
 
 In order to get a better undertanding of the Swift programming language I took
